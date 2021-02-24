@@ -16,8 +16,8 @@
     $userID = "";
     $statement = "SELECT * FROM shows";
     $first = true; 
-     if(isset($_GET['UserID'])){
-        $userID = $_GET['UserID'];
+      if(isset($_COOKIE["user"])){
+         $userID = $_COOKIE["user"];
      }else{
          $userID = 1;
      }
@@ -49,8 +49,10 @@
           $statement .= " and genre = '$genre'"; 
        }
      }
-     if(isset($_GET['SearchB']) and $_GET['SearchB'] != ""){
-         $search = $_GET['SearchB'];
+     if(isset($_GET['SearchB'])){
+     $search = trim($_GET['SearchB']);
+     }
+     if(!empty($search)){
         if($first){
           $first = false;
           $statement .= " where play LIKE  '%$search%'";
@@ -58,8 +60,11 @@
           $statement .= " and play LIKE  '%$search%'"; 
        }
      }
-     if(isset($_GET['SearchC'] )and $_GET['SearchC'] != ""){
-        $city = $_GET['SearchC'];
+     if(isset($_GET['SearchC'])){
+     $city = trim($_GET['SearchC']);
+     }
+     if(!empty($city)){
+        
         if($first){
           $first = false;
           $statement .= " where city LIKE '%$city%'";
@@ -121,10 +126,12 @@
             </div>
         
         <div class = "BannerAd">
-            <img src="img/Drama1.jpg" width ="100%" height="100%">
+            
         </div>
         <h1 id = "showTitle">Shows</h1>
+                      <img src="img/menu.png" id = "sideShow"/>
           <div class = "column">
+ 
          <div class = "sideBar">
              <?php echo'  <form action="shows.php" method="GET">
                     <h3>Search:</h3>
@@ -177,7 +184,7 @@
                     <input type="radio" id="18+" name="Age" value="18">
                     <label for="18+">18</label>
                     <br>
-                    <input type="submit" value="Submit">
+                    <input id ="subSide" type="submit" value="Submit">
                 </form>'; ?>
                   
           </div>
@@ -286,7 +293,7 @@ html {
                 margin: 0px;
                 padding: 0px;
                 max-width: 1200px;
-                min-width: 500px;
+                min-width: 290px;
                 margin: auto;
                 background-color: #08080c;
                 border: solid 4px #ff0429;
@@ -369,6 +376,11 @@ html {
                 width: 100%;
                 height: 250px;
                 margin: 10px auto;
+                background-image: url("img/Drama1.jpg");
+                background-repeat: no-repeat; 
+                background-size: cover;
+                background-position: bottom;
+                    
             }
             .sideBar{
                background-color: #555555;
@@ -412,6 +424,11 @@ html {
                 
                 
             }
+             #sideShow{
+                width: 0%;
+                visibility: hidden;
+              }
+              
             .show{
                 display: inline-flex;
                 margin: 10px;
@@ -425,12 +442,56 @@ html {
                 width:60%;
                 margin-left: 10px;
             }
-            @media only screen and (max-width: 800px) {
-              .sideBar{
-                width: 25%;
-            }  
+            input[type=submit]{
+                cursor:pointer;
+                -webkit-border-radius: 5px;
+                border-radius: 5px; 
+                padding: 5px;
+                color:black;
+                background-color: #fefeff;
+               margin: 10px 0 10px 11%;
             }
-           
+            
+            @media only screen and (max-width: 800px) {
+            .footer{
+               font-size: 80%; 
+            }
+            
+            }
+            @media only screen and (max-width: 600px) {
+              .sideBar{
+                width: 0%;
+                visibility: hidden;
+            
+              }
+              #sideShow{
+                width: auto;
+                height: 30px;
+                visibility: visible;
+              }
+              .Logo{
+                width: 360px;
+                height: 120px;
+                bottom: 40px;  
+            }
+            html{
+                font-size: 90%;
+            }
+            .showsArea{
+                width: 90%;
+            }
+                
+            }
+            @media only screen and (max-width: 470px) {
+                .nav [type=submit]{
+                    font-size: 90%;
+                }
+                .Logo{
+                width: 300px;
+                height: 100px;
+                bottom: 30px;  
+            }
+            }
     
             
        @media (min-aspect-ratio: 2/1) {

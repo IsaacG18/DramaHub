@@ -4,27 +4,22 @@
             
            
             $id = $_POST['id'];
-            $password = $_POST['password'];
-             
-            $query = $con ->prepare("SELECT * FROM users WHERE userID = :userID and  password = :password");
+            $password = crypt(sha1(md5($_POST['password'])), 'XY');
+            
+            
+            $query = $con ->prepare("SELECT * FROM users WHERE userID = :userID");
             $success = $query->execute([
-                ':userID' => $id,
-                ':password' => $password
+                ':userID' => $id
                     ]);
             $users = $query->fetch(PDO::FETCH_OBJ);
             
             
             
-           if($success){
+           if($users->password === $password){
                
-             $function = "delete";
+             $function = "Delete";
              include_once 'UpLogDel.php';
-                   
-                     if($successes){
-                         echo "Account was deleted successfully";
-                     }
-                     
-                      echo "Account was deleted failed";
+                 
             }else{
                echo "invalid attempt";
             }

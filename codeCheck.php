@@ -2,7 +2,7 @@
             include_once 'dbconnection.php';
             
             $code = $_POST['code'];
-            $pass = $_POST['PW'];
+            $pass = crypt(sha1(md5($_POST['PW'])), 'XY');
             
             
            

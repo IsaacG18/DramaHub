@@ -71,6 +71,7 @@ and open the template in the editor.
             p{
                 color: #ff0429;
                 margin: 0;
+                font-size: 13px;
             }
             
         </style>

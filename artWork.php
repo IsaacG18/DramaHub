@@ -15,10 +15,15 @@
      <?php
      include_once 'dbconnection.php';
     $userID = "";
-     if(isset($_GET['UserID'])){
-        $userID = $_GET['UserID'];
+      if(isset($_COOKIE["user"])){
+         $userID = $_COOKIE["user"];
      }else{
          $userID = 1;
+     }
+     if(isset($_GET['artID'])){
+        $artID = $_GET['artID'];
+     }else{
+         $artID = 1;
      }
     ?>
     <body>
@@ -72,7 +77,7 @@
             
             </div>
         
-        <?php  $query = $con ->prepare("SELECT * FROM art inner join users on art.userID = users.userID where artID = 1");
+        <?php  $query = $con ->prepare("SELECT * FROM art inner join users on art.userID = users.userID where artID = $artID");
             $success = $query->execute([
                 
                     ]);
@@ -132,7 +137,7 @@
                 margin: 0px;
                 padding: 0px;
                 max-width: 1200px;
-                min-width: 800px;
+                min-width: 350px;
                 margin: auto;
                 background-color: #08080c;
                 border: solid 4px #ff0429;
@@ -149,12 +154,12 @@
             
             
             .Logo{
-                width: 480px;
-                height: 160px;
+                width: 450px;
+                height: 150px;
                 float: left;
                 position: relative;
                 margin: 0;
-                bottom: 52px;
+                bottom: 49px;
                 
                 
             }
@@ -241,4 +246,49 @@
 html {
   font-size: 50%;
 }
+@media only screen and (max-width: 700px) {
+            
+            p{
+                font-size: 2rem;
+            }
+            Logo{
+                width: 360px;
+                height: 120px;
+                bottom: 40px;  
+            }
+            
+           
+        }
+        @media only screen and (max-width: 550px) {
+           
+           .nav [type=submit]{
+                    font-size: 95%;
+                }
+                .Logo{
+                width: 300px;
+                height: 100px;
+                bottom: 30px;  
+            }
+               
+            .footer p{
+           font-size: 1.3rem;
+        }
+        }
+        @media only screen and (max-width: 400px) {
+           
+           .nav [type=submit]{
+                    font-size: 95%;
+                }
+                .Logo{
+                width: 240px;
+                height: 80px;
+                bottom: 25px;  
+            }
+               
+            .footer p{
+           font-size: 1.3rem;
+        }
+        }
+
+ 
 </style>

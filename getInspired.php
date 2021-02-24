@@ -9,12 +9,30 @@
     </head>
     
     <?php
+    include_once 'dbconnection.php';
     $userID = "";
-     if(isset($_GET['UserID'])){
-        $userID = $_GET['UserID'];
+      if(isset($_COOKIE["user"])){
+         $userID = $_COOKIE["user"];
      }else{
          $userID = 1;
      }
+     if(isset($_GET['Acount'])){
+            $Acount = $_GET['Acount'];
+            }else{
+            $Acount = 6; 
+            }
+     if(isset($_GET['Ucount'])){
+            $Ucount = $_GET['Ucount'];
+            }else{
+            $Ucount = 6; 
+            }
+     if(isset($_GET['Wcount'])){
+            $Wcount = $_GET['Wcount'];
+            }else{
+            $Wcount = 6; 
+            }
+     
+            
     ?>
     <body>
         <div class = "banner">
@@ -71,29 +89,88 @@
 
               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </p>
               
-              <iframe width="100%" height="300" src="https://www.youtube.com/embed/64UW3Gmp5VA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-         
-        </div>
+              <iframe src="https://www.youtube.com/embed/64UW3Gmp5VA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              <br>
+              <?php
+              echo' <div class = "search"><form action="getInspired.php" method="GET">
+                    <input type="text" id="Search" name="Search">
+                    <input id ="subSide" type="submit" value="Submit">
+                    </form></div>';
+              ?></div>
+            <br>
+            <br>
+            <br>
+               <?php
+                    $search = trim($_GET['Search']);
+                    if(!empty($search)){
+                      $output = "";
+                   $output .="<h1>Search Results</h1>";   
+        $output .="<div class = 'blocks'>";
+        $query = $con ->prepare("SELECT * FROM art where title LIKE  '%$search%'");
+            $success = $query->execute([
+                
+                    ]);
+            $Items = $query->fetchall(PDO::FETCH_OBJ);
+            
+            
+            if($success){
+                
+                foreach($Items as $Item){
+                    
+                  
+                  $output .="<div class = 'art'> <img src='$Item->img'/> <br> "
+                          . "<form form action='artWork.php' method='GET'>"
+                          . "<input name='artID' type='hidden' value='$Item->artID'>"
+                          . "<input name = 'submit' type='submit' value='$Item->title'>"
+                          . "</form>"
+                          . "</div>";
+                  $u++;
+            }
+         }
+     
+        $output .= "</div>";
+            
+        
+            echo $output; 
+                    }
+              ?>
+        
+        
         <hr>
-            <h1>Artist's Work</h1>
-            <div class = "Artist">
+            <h1>Your's Work</h1>
+            <div class = "Your Work">
             <?php
-        $monos = ["<img src = 'img/Drama1.jpg'>", "<img src = 'img/Drama2.jpg'>", "<img src = 'img/Drama3.jpg'>", "<img src = 'img/Drama1.jpg'>", "<img src = 'img/Drama2.jpg'>", "<img src = 'img/Drama3.jpg'>", "<img src = 'img/Drama3.jpg'>"];
         $output = "";
         $output .="<div class = 'blocks'>";
-        $count = 0;
-        $show = false;
-        
-        foreach ($monos as $mono){
+        $query = $con ->prepare("SELECT * FROM art WHERE type = 'User'");
+            $success = $query->execute([
+                
+                    ]);
+            $users = $query->fetchall(PDO::FETCH_OBJ);
             
-             $output .="<div class = 'art'> $mono <br> <h3>This is something</h3></div>";
-             $count++;
-             if($count > 5 && $show == false){
-                 break;
-             }
-        }
+            $u = 0;
+            if($success){
+                
+                foreach($users as $user){
+                    
+                if($Ucount > $u){    
+                  $output .="<div class = 'art'> <img src='$user->img'/> <br> "
+                          . "<form form action='artWork.php' method='GET'>"
+                          . "<h3>$user->title</h3>"
+                          . "<input name='artID' type='hidden' value='$user->artID'>"
+                          . "<input name = 'submit' type='submit' value='Click for more'>"
+                          . "</form></div>";
+                  $u++;
+                }
+            }
+         }
+     
         $output .= "</div>";
-        
+            $Ucount += 6;
+        $output .= "<div class = 'loadmore'><form action='getInspired.php' method='GET'>"
+                . "<input name='Ucount' type='hidden' value='$Ucount'>"
+                . "<input name = 'submit' type='submit' value='Load More'>"
+                . "</form></div>";
             echo $output;
         
         ?>
@@ -102,21 +179,36 @@
             
             <h1>Activities</h1>
             <div class = "Activities">
-                <?php
-        $monos = ["<img src = 'img/Drama1.jpg'>", "<img src = 'img/Drama2.jpg'>", "<img src = 'img/Drama3.jpg'>", "<img src = 'img/Drama1.jpg'>", "<img src = 'img/Drama2.jpg'>", "<img src = 'img/Drama3.jpg'>", "<img src = 'img/Drama3.jpg'>"];
+                 <?php
         $output = "";
         $output .="<div class = 'blocks'>";
-        $count = 0;
-        $show = false;
-        foreach ($monos as $mono){
-
-             $output .="<div class = 'task'> $mono <br> <h3>This is something</h3></div>";
-             $count++;
-             if($count > 5 && $show == false){
-                 break;
-             }
-        }
-        $output .= "</div>";
+        $query = $con ->prepare("SELECT * FROM art WHERE type = 'Work'");
+            $success = $query->execute([
+                
+                    ]);
+            $works = $query->fetchall(PDO::FETCH_OBJ);
+            
+            $w = 0;
+            if($success){
+                foreach($works as $work){
+                    if($Wcount > $w){
+                  $output .="<div class = 'art'> <img src='$work->img'/> <br>"
+                          . "<h3>$work->title</h3>"
+                          . "<form form action='artWork.php' method='GET'>"
+                          . "<input name='artID' type='hidden' value='$work->artID'>"
+                          . "<input name = 'submit' type='submit' value='Click for more'>"
+                          . "</form></div>";
+                  $w++;
+                    }
+            }
+         }
+         $Wcount += 6;
+         $output .= "</div>";
+        $output .= "<div class = 'loadmore'><form action='getInspired.php' method='GET'>"
+                . "<input name='Wcount' type='hidden' value='$Wcount'>"
+                . "<input name = 'submit' type='submit' value='Load More'>"
+                . "</form></div>";
+        
         
             echo $output;
         
@@ -124,23 +216,38 @@
             </div>
             <hr>
             
-            <h1>Your Work</h1>
+            <h1>Artist</h1>
             <div class = "Artist">
-                <?php
-        $monos = ["<img src = 'img/Drama1.jpg'>", "<img src = 'img/Drama2.jpg'>", "<img src = 'img/Drama3.jpg'>", "<img src = 'img/Drama1.jpg'>", "<img src = 'img/Drama2.jpg'>", "<img src = 'img/Drama3.jpg'>", "<img src = 'img/Drama3.jpg'>"];
+                 <?php
         $output = "";
         $output .="<div class = 'blocks'>";
-        $count = 0;
-        $show = false;
-        foreach ($monos as $mono){
-             
-             $output .="<div class = 'users'> $mono <br> <h3>This is something</h3></div>";
-             $count++;
-             if($count > 5 && $show == false){
-                 break;
-             }
-        }
-        $output .= "</div>";
+        $query = $con ->prepare("SELECT * FROM art WHERE type = 'Artist'");
+            $success = $query->execute([
+                
+                    ]);
+            $artist = $query->fetchall(PDO::FETCH_OBJ);
+            
+            $a = 0;
+            if($success){
+                foreach($artist as $art){
+                    if($Acount > $a){
+                  $output .="<div class = 'art'> <img src='$art->img'/> <br> "
+                          . "<h3>$art->title</h3>"
+                          . "<form form action='artWork.php' method='GET'>"
+                          . "<input name='artID' type='hidden' value='$art->artID'>"
+                          . "<input name = 'submit' type='submit' value='Click for more'>"
+                          . "</form></div>";
+                  $a++;
+                    }
+            }
+         }
+         $Acount += 6;
+         $output .= "</div>";
+        $output .= "<div class = 'loadmore'><form action='getInspired.php' method='GET'>"
+                . "<input name='Acount' type='hidden' value='$Acount'>"
+                . "<input name = 'submit' type='submit' value='Load More'>"
+                . "</form></div>";
+        
         
             echo $output;
         
@@ -214,7 +321,7 @@ html {
                 margin: 0px;
                 padding: 0px;
                 max-width: 1200px;
-                min-width: 800px;
+                min-width: 350px;
                 margin: auto;
                 background-color: #08080c;
                 border: solid 4px #ff0429;
@@ -313,50 +420,56 @@ html {
                margin: 3px auto;
             }
             .art{
-                height: 250px;
+                height: 290px;
             }
-            .art img{
-               height: 70%;
-               display: block;
-               width: 90%;
-               margin: 3px auto;
-            }
-            .task h3{
-               margin: 3px auto;
-            }
-            .task{
-                height: 250px;
-            } 
-            .task img{
-               height: 70%;
-               display: block;
-               width: 90%;
-               margin: 3px auto;
-            }
-            .users h3{
-               margin: 3px auto;
-            }
-            .users{
-                height: 250px;
-            }
-            .users img{
-               height: 70%;
-               display: block;
-               width: 90%;
-               margin: 3px auto;
-            }
+         
+            
+            
             .firstColumn{
                 margin: 5px;
                 text-align: center;
                 margin: 3px auto;
                 width: 70%;
             }
+            .loadmore form{
+
+                text-align: center;  
+                margin: 10px;
+            }
+            .loadmore input[type=submit], .search input[type=submit]{
+                color: #fefeff;
+                background-color: #ff0429;
+                border:#ead700 2px solid;
+                border-radius: 15px;
+                padding: 5px;
+            }
+            .search{
+                float: left;
+                margin: 10px 2px;
+                
+            }
+            iframe{
+                width: 600px;
+                height: 450px;
+            }
+            .art input[type=submit]{
+                color: #fefeff;
+                font-size: 2rem;
+                border: none;
+                cursor: pointer;
+                outline: none;
+                background-color: #ff0429;
+                padding: 2px;
+                border-radius: 5px;
+                margin: 5px 0;
+            }
+            
            @media only screen and (max-width: 800px) {
         .blocks{
             display: block;
         }
-        .art, .task, .users{
-            height: 400px;
+        .art{
+            height: 550px;
             width: 80%;
             margin: 10px auto;
         }
@@ -375,9 +488,108 @@ html {
         .firstColumn iframe{
             width:70%;
         }
+        .art img{
+               height: 400px;
+               width: 500px;
+               
+            }
+            p{
+                font-size: 2.5rem;
+            }
+            iframe{
+                width: 450px;
+                height: 337.5px;
+            }
+            
+           }
+        @media only screen and (max-width: 650px) {
+            .art{
+            height: 480px;
+            width: 80%;
+            margin: 10px auto;
+        }
+        .art img{
+               height: 360px;
+               width: 450px;    
+            }
+            p{
+                font-size: 2rem;
+            }
+            Logo{
+                width: 360px;
+                height: 120px;
+                bottom: 40px;  
+            }
+            iframe{
+                width: 400px;
+                height: 300px;
+            }
+            
+           
+        }
+        @media only screen and (max-width: 550px) {
+            .art{
+            height: 450px;
+            width: 80%;
+            margin: 10px auto;
+        }
+        .art img{
+               height: 280px;
+               width: 350px;    
+            }
+            iframe{
+                width: 300px;
+                height: 225px;
+            }
+           .nav [type=submit]{
+                    font-size: 95%;
+                }
+                .Logo{
+                width: 300px;
+                height: 100px;
+                bottom: 30px;  
+            }
+                .Logo{
+                width: 300px;
+                height: 100px;
+                bottom: 30px;  
+            }
+            .footer p{
+           font-size: 1.3rem;
+        }
+            
+        }
+    
+    @media only screen and (max-width: 550px) {
+            .art{
+            height: 400px;
+            width: 80%;
+            margin: 10px auto;
+        }
+        .art img{
+               height: 280px;
+               width: 300px;    
+            }
+        }
+    @media only screen and (max-width: 500px) {
+            .art{
+            height: 350px;
+            width: 80%;
+            margin: 10px auto;
+        }
+        .art img{
+               height: 200px;
+               width: 250px;    
+            }
+        
+        iframe{
+                width: 250px;
+                height: 187.5px;
+            }
+    }
        
        
-    }  
+     
    
 
         </style>

@@ -14,8 +14,8 @@
     
      <?php
     $userID = "";
-     if(isset($_GET['UserID'])){
-        $userID = $_GET['UserID'];
+      if(isset($_COOKIE["user"])){
+         $userID = $_COOKIE["user"];
      }else{
          $userID = 1;
      }
@@ -74,12 +74,12 @@
        
         <div class = "firstColumn">
             
-              <div class="container">
+    <div class="container">
       <div class="calendar">
         <div class="month">
           <i class="fas fa-angle-left prev"></i>
           <div class="date">
-            <h1></h1>
+              <h1><a href="datesdisplay.php"></a></h1>
             <p></p>
           </div>
           <i class="fas fa-angle-right next"></i>
@@ -110,14 +110,14 @@
         <div class="split1"></div>
            <div class = "Welcome">
             <h1>Audition Prep</h1>
-            <iframe width= "80%" height="400" src="https://www.youtube.com/embed/EQFwooZpbOc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe  src="https://www.youtube.com/embed/EQFwooZpbOc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
         <div class="split2"></div>
          <div class = "secondColumn">
          <h1>Before Audition</h1>
 
            <div class = "advice2">
-              <iframe width="100%" height="300" src="https://www.youtube.com/embed/64UW3Gmp5VA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              <iframe src="https://www.youtube.com/embed/64UW3Gmp5VA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
            </div>
          <div class = "advice1">
               <ul>
@@ -135,14 +135,14 @@
 
               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </p>
               
-              <iframe width="100%" height="300" src="https://www.youtube.com/embed/64UW3Gmp5VA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              <iframe src="https://www.youtube.com/embed/64UW3Gmp5VA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
          
         </div>
         <div class="split4"></div>
         <div class = "secondColumn">
          <h1>Doing your Audition</h1>
             <div class = "advice2">
-              <iframe width="100%" height="300" src="https://www.youtube.com/embed/64UW3Gmp5VA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              <iframe  src="https://www.youtube.com/embed/64UW3Gmp5VA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
            </div>
           
           <div class = "advice1">
@@ -213,6 +213,7 @@ html {
             }
             
             
+            
             .Logo{
                 width: 480px;
                 height: 160px;
@@ -236,7 +237,7 @@ html {
                 margin: 0px;
                 padding: 0px;
                 max-width: 1200px;
-                min-width: 800px;
+                min-width: 300px;
                 margin: auto;
                 background-color: #08080c;
                 border: solid 4px #ff0429;
@@ -337,9 +338,12 @@ html {
                 background-color: #ff0429;
                 height: 200px;
             }
+            
             .welcome iframe{
                 margin: auto;
                 display:block;
+                width: 700px;
+                height: 400px;
             }
             .welcome h1{
                 
@@ -363,6 +367,11 @@ html {
                 background-size: cover;
                 background-position: center;
             }
+            iframe{
+           height: 400px;
+           width: 500px; 
+        }
+        
             .split2{
                  width: 100%;
                 height: 200px;
@@ -428,13 +437,15 @@ html {
                     cursor: pointer;
                   }
 
-                  .month h1 {
+                  .month a {
                     font-size: 3rem;
                     font-weight: 400;
                     text-transform: uppercase;
                     letter-spacing: 0.2rem;
                     margin-bottom: 1rem;
+                    color: #ead700;
                   }
+                  
 
                   .month p {
                     font-size: 1.6rem;
@@ -511,16 +522,29 @@ li{
             }
 }
 @media only screen and (max-width: 950px) {
-
+        .firstColumn{
+                display: block;
+                margin: 10px auto;
+        }
+        .thirdColumn{
+            width: 90%;
+        }
+        
+        .container{
+            width: 90%;
+            margin: 10px auto;
+        }
         .details{
-            width: 40%;
+            width: 90%;
             
         }
         .li{
             font-size: 1.5rem;
         }
-        
-        
+        iframe, .welcome iframe{
+           height: 400px;
+           width: 500px; 
+        }
         .mono{
             height: 500px;
         }
@@ -531,8 +555,6 @@ li{
         h1{
             font-size: 4rem;
         }
-      
-       
         .advice1{
             display: block;
             width: 90%;
@@ -544,15 +566,91 @@ li{
             width: 90%;
             margin: 10px auto; 
         }
-        .advice2 iframe, .thirdColumn iframe{
-            height: 400px;
-            height: 400px;
-        }
-        iframe{margin: 0px;}
+        
+        iframe{margin: 0;}    
 }   
-p{
-    font-size: 2rem;
-}
+@media only screen and (max-width: 650px) {
+    .advice2{
+        width: 80%;
+    }
+              .Logo{
+                width: 360px;
+                height: 120px;
+                bottom: 40px;  
+            }
+            html{
+                font-size: 40%;
+            }
+            .container{
+                height: 350px;
+                margin: 10px auto;
+            }
+            iframe, .welcome iframe{
+                height: 320px;
+                width: 400px;
+            }
+            .thirdColumn, .firstColumn,.Welcome, .secondColumn{
+                width: 95%;
+                
+            }   
+}        
+            @media only screen and (max-width: 500px) {
+                .nav [type=submit]{
+                    font-size: 90%;
+                }
+                .footer p{
+                    font-size: 1.5rem;
+                }
+                .footer{height: 125px;}
+                
+            iframe, .welcome iframe{
+                height: 200px;
+                width: 300px;
+            }
+            .thirdColumn, .firstColumn,.Welcome, .secondColumn{
+                width: 99%;
+            }
+                .advice2{
+            width: 70%;
+            }
+          
+                .Logo{
+                width: 300px;
+                height: 100px;
+                bottom: 30px;  
+            }
+            }
+            @media only screen and (max-width: 400px) {
+            .Logo{
+                width: 270px;
+                height: 90px;
+                bottom: 30px;  
+            }
+            iframe, .welcome iframe{
+                height: 200px;
+                width: 250px;
+            }
+            .footer p{
+                    font-size: 1.4rem;
+                }
+                p, li{
+                   font-size:2rem; 
+                }
+            }
+            @media only screen and (max-width: 350px) {
+            .Logo{
+                width: 270px;
+                height: 90px;
+                bottom: 30px;  
+            }
+            iframe, .welcome iframe{
+                height: 160px;
+                width: 200px;
+            }
+            .footer p{
+                    font-size: 1.4rem;
+                }
+            }
 
 
 

@@ -11,8 +11,8 @@
      <?php
      include_once 'dbconnection.php';
     $userID = "";
-     if(isset($_GET['UserID'])){
-        $userID = $_GET['UserID'];
+     if(isset($_COOKIE["user"])){
+         $userID = $_COOKIE["user"];
      }else{
          $userID = 1;
      }

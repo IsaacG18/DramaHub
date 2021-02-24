@@ -79,24 +79,22 @@ and open the template in the editor.
             color: #ff0429;
             margin: 0px;
             }
-        </style>
-        <?php
-          $userID = $_POST['UserID'];
-                  
-        ?> 
-        
-        <div id = "box">
+        </style>     
+           <?php if(isset($_POST['UserID'])){
+               $userID = $_POST['UserID'];
+               echo ("<div id = 'box'>
             <h1>Delete</h1>
-        <form method="POST">
-            
-           <?php echo ("<input name= 'UserID' id ='UserID' type='hidden' value='$userID'>
+            <form method='POST'>
+            <input name= 'UserID' id ='UserID' type='hidden' value='$userID'>
             <label for = 'PW'>Password</label>
             <Input type = 'password' Name ='PW' id = 'PW'>
             <label for = 'PW2'>Re-Password</label>
             <Input type = 'password' Name ='PW2' id = 'PW2'>
             <p id = 'passwordWrong'></p>
-            <input id='buttondelete' type='button' Name = 'Delete' value='Delete'>") ?> 
-        </form>
+            <input id='buttondelete' type='button' Name = 'Delete' value='Delete'>"
+           . " </form>");} 
+           ?> 
+       
             
       
            

@@ -18,7 +18,7 @@ $(document).ready(function () {
                             $('input[type="password"]').css({"border": "2px solid red", "box-shadow": "0 0 3px red"});
                             document.getElementById("pReset").innerHTML = "*Some infomation is incorrect";
                         } else if (data.includes('again')) {
-                            alert(data);
+                            document.getElementById("pReset").innerHTML = (data);
                         } else if (data.includes('correctly')) {
                               window.location.href =  "SignIn.php";
                         } else {

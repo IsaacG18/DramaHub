@@ -1,23 +1,17 @@
 function createCookie(name, value, days) {
-    
         var expires; 
         var date = new Date(); 
-        
         date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000)); 
         expires = "; expires=" + date.toGMTString(); 
-   
-    document.cookie = escape(name) + "=" +  
-        escape(value) + expires + "; path=/"; 
+    document.cookie = name + "=" +  
+        value + expires + "; path=index.php"; 
 }
 
 $(document).ready(function () {
     $("#buttonlogin").click(function () {
         var username = $("#username").val();
         var password = $("#PW").val();
-        var funct = $("#buttonlogin").val();
-        
-    
-
+       
         if (username === '') {
             document.getElementById("usernameWrong").innerHTML = "*Fill in username";
             $('input[type="text"]').css("border", "2px solid red");
@@ -36,20 +30,20 @@ $(document).ready(function () {
                  $('input[type="password"]').css("box-shadow", "none"); 
                  document.getElementById("usernameWrong").innerHTML = "";
                  document.getElementById("passwordWrong").innerHTML = "";
-            $.post("Check.php", {username: username, password: password, Check: funct},
+            $.post("Check.php", {username: username, password: password},
                     function (data) {  //  data is passed back from the echo statement in the php
                         if (data.includes('invalid')) {
                             $('input[type="text"]').css({"border": "2px solid red", "box-shadow": "0 0 3px red"});
                             $('input[type="password"]').css({"border": "2px solid red", "box-shadow": "0 0 3px red"});
-                            alert(data); 
+                            document.getElementById("passwordWrong").innerHTML = data; 
                         } else if (data.includes('Wrong')) {
                             $('input[type="text"],input[type="password"]').css({"border": "2px solid red", "box-shadow": "0 0 3px red"});
-                            alert(data);
+                            document.getElementById("passwordWrong").innerHTML = data;
                         } else if (data.includes('successfully')) {
-                            var num = data.charAt(0);
-//                            createCookie("index", num, "7"); 
-//                            window.location.href = document.cookie;
-                            window.location.href =  "index.php?UserID=" + num;
+                            var num = data.split(" ");
+                            createCookie("user", num[0], "7"); 
+                            window.location.href = document.cookie;
+                            //window.location.href =  "index.php?UserID=" + num[0];
                         } else {
                             alert('Check with system admin, report this message login.js 26 '+ data);
                         }

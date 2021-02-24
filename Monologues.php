@@ -8,7 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=PT+Sans&display=swap" rel="stylesheet">
     
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>       
-    <!-- comment  <script type="text/javascript" src="js/monologues.js"></script>-->
+    <script type="text/javascript" src="js/monologues.js"></script>
     </head>
     
     
@@ -17,8 +17,8 @@
     $userID = "";
     $statement = "SELECT * FROM monologue";
     $first = true; 
-     if(isset($_GET['UserID'])){
-        $userID = $_GET['UserID'];
+      if(isset($_COOKIE["user"])){
+         $userID = $_COOKIE["user"];
      }else{
          $userID = 1;
      }
@@ -31,8 +31,8 @@
           $statement .= " and age = '$age'"; 
        }
      }
-     if(isset($_GET['Gender'])){
-        $gender = $_GET['Gender'];
+     if(isset($_GET['gender'])){
+        $gender = $_GET['gender'];
         if($first){
           $first = false;
           $statement .= " where gender = '$gender'";
@@ -59,7 +59,10 @@
        }
      }
      if(isset($_GET['SearchB'])){
-        $search = $_GET['SearchB'];
+     $search = trim($_GET['SearchB']);
+     }
+     if(!empty($search)){
+        
         if($first){
           $first = false;
           $statement .= " where play LIKE  '%$search%'";
@@ -127,14 +130,17 @@
 
               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </p>
               
-              <iframe width="100%" height="300" src="https://www.youtube.com/embed/64UW3Gmp5VA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              <iframe width="100%" height="400" src="https://www.youtube.com/embed/64UW3Gmp5VA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
          
         </div>
         <hr>
         <h1 id = "monoTitle">Monologues</h1>
+        <img src="img/menu.png" id = "sideShow"/>
           <div class = "column">
+              
               <div class = "sideBar">
-               <?php echo"<form action='Monologues.php' method='GET>
+                  
+               <?php echo"<form action='Monologues.php' method='GET'>
                    
 
                     <h3>Search:</h3>
@@ -204,7 +210,7 @@
             $count = 0;
         foreach ($monos as $mono){
             $count++;
-             $output .="<div class = 'mono'> $mono->img <br> <h3>$mono->play</h3> <h3>$mono->part</h3> <h3>$mono->title</h3>"
+             $output .="<div class = 'mono'> <img src ='$mono->img'/> <br> <h3>$mono->play</h3> <h3>$mono->part</h3> <h3>$mono->title</h3>"
                      . "<form action='monoPage.php' method='GET'>
                 <input name= 'UserID' type='hidden' value='$userID'>
                 <input name= 'MonoID' type='hidden' value='$mono->monoID'>
@@ -268,7 +274,7 @@ html {
                 margin: 0px;
                 padding: 0px;
                 max-width: 1200px;
-                min-width: 600px;
+                min-width: 300px;
                 margin: auto;
                 background-color: #08080c;
                 border: solid 4px #ff0429;
@@ -305,14 +311,7 @@ html {
                 text-shadow: 0 0.15rem 0.15rem rgba(200, 200, 200, 0.5);
                 text-align: center;
             }
-            body{
-                margin: 0px;
-                padding: 0px;
-                width: 1080px;
-                margin: auto;
-                background-color: #08080c;
-                border: solid 4px #ff0429;
-            }
+            
             .banner{
                 width: 100%;
                 height: 550px;
@@ -409,9 +408,9 @@ html {
                 width: 70%;
             }
             .mono img{
-               height: 55%;
-               display: block;
-               width: auto;
+               height: auto;
+               
+                width: 250px;
                margin: 3px auto;
             }
             .mono h3{
@@ -460,23 +459,131 @@ html {
                 height: 30px;
                 margin: 10px;
             }
-    @media only screen and (max-width: 800px) {
+            input[type=submit]{
+                cursor:pointer;
+                -webkit-border-radius: 5px;
+                border-radius: 5px; 
+                padding: 5px;
+                color:black;
+                background-color: #fefeff;
+               margin: 10px 0 10px 11%;
+            }
+            #sideShow{
+                width: 0%;
+                visibility: hidden;
+              }
+              
+    @media only screen and (max-width: 1000px) {
         .monologues{
             display: block;
-            
+            margin: 10px auto;
         }
-        .mono{
-            height: 800px;
+         .mono{
+            height: 690px;
+            margin: 3px auto;
+            width: 90%;
         }
+       
         .mono h3{
-            font-size: 4rem;
+            font-size: 3rem;
             margin: 5px 20px;
         }
-      .sideBar{
-                width: 25%;
-            } 
+      
+            .mono img{
+                width: 100%;
+                height: auto;
+                margin: 3px auto;
+            }
         
     }
+     @media only screen and (max-width: 900px) {
+        
+         .mono{
+            height: 650px;
+        }
+       
+        .monologues{
+               width: 75%;
+            }
+      
+            .firstColumn{
+                width: 90%;
+            }
+        
+    }
+    @media only screen and (max-width: 800px) {
+        
+         .mono{
+            height: 600px;
+        }
+        .footer p{
+           font-size: 2.5rem;
+        }
+        iframe{
+                height: 300px;
+            }
+       
+        
+      
+        
+    }
+            @media only screen and (max-width: 650px) {
+              .sideBar{
+                width: 0%;
+                visibility: hidden;
+            
+              }
+              #sideShow{
+                width: auto;
+                height: 30px;
+                visibility: visible;
+              }
+              html{
+                    font-size:35%;
+                }
+              .Logo{
+                width: 360px;
+                height: 120px;
+                bottom: 40px;  
+            }iframe{
+                height: 250px;
+            }
+            
+            html{
+                font-size: 40%;
+            }
+            .showsArea{
+                width: 90%;
+            }
+            .firstColumn{
+                width: 95%;
+            }
+            .mono{
+                width: 90%;
+                height: auto;
+                margin: 3px auto;
+            }
+            .monologues{
+               width: 90%;
+            }
+                
+            }
+            @media only screen and (max-width: 500px) {
+                .nav [type=submit]{
+                    font-size: 90%;
+                }
+                html{
+                    font-size:30%;
+                }
+                iframe{
+                height: 200px;
+            }
+                .Logo{
+                width: 270px;
+                height: 90px;
+                bottom: 30px;  
+            }
+            }
               
     
     

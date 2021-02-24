@@ -1,11 +1,5 @@
 <?php
 try{
-//        $host = 'studentnet.dundeeandangus.ac.uk';
-//        $dbname = "db_1415244";
-//        $username = "1415244";
-//        $password = "TDPassword1";
-
-
              $host = 'localhost';
              $dbname = 'dramahub';
              $username = 'root';

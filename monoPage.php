@@ -11,8 +11,8 @@
      <?php
      include_once 'dbconnection.php';
     $userID = "";
-     if(isset($_GET['UserID'])){
-        $userID = $_GET['UserID'];
+     if(isset($_COOKIE["user"])){
+         $userID = $_COOKIE["user"];
      }else{
          $userID = 1;
      }
@@ -89,16 +89,16 @@
         
        
         
-        $output .= "<div class = 'Pre-Mono'>"
-                . "<div class = 'info'>"
-                . "<h1>Play: $Play</h1>"
-                . "<h3>Character: $Part</h3>"
-                . "<h3>Title: $Title</h3>"
-                . "<h3>Author: $author</h3>"
-                . "<p>$description</p>"
-                ."</div><div class = 'mono-img'>"
-                . "$img"
-                . "</div></div><hr>";
+        $output .= "<div class = 'Pre-Mono'>
+                <div class = 'info'>
+                <h1>Play: $Play</h1>
+                <h3>Character: $Part</h3>
+                <h3>Title: $Title</h3>
+                <h3>Author: $author</h3>
+                <p>$description</p>
+                </div><div class = 'mono-img'>
+                <img src='$img'/>
+                </div></div><hr>";
         
         
         $output .= "<article><p>$content</p></article><hr>";
@@ -110,7 +110,7 @@
 
               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </p>
               
-              <iframe width="100%" height="400" src="https://www.youtube.com/embed/64UW3Gmp5VA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+              <iframe src="https://www.youtube.com/embed/64UW3Gmp5VA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
          
         </div>
         <hr>
@@ -164,7 +164,8 @@
            
             body{
                 margin: 0px;
-                width: 1080px;
+                max-width: 1200px;
+                min-width: 350px;
                 margin: auto;
                 background-color: #08080c;
                 border: solid 3px #ff0429;
@@ -220,6 +221,10 @@
                cursor: pointer;
                  
             }
+             iframe{
+           height: 400px;
+           width: 500px; 
+        }
            
             hr{
                 width: 90%;
@@ -262,6 +267,10 @@
                 width: 80%;
                 
             }
+            iframe{
+                height: 400px;
+                width: 500px;
+            }
             
             .tip{
                 margin: 5px;
@@ -282,7 +291,7 @@
                 
             }
             @media only screen and (max-width: 800px) {
-                .tip p, article p{
+                .tip p, article p , .tip p{
                     font-size: 23px;
                 }
             }
@@ -305,6 +314,92 @@
                 
                 
             }
+             
+            .LogoF{
+                width: 180px;
+                height: 60px;
+                
+                position: relative;
+                margin: 0;
+                bottom: 11px;
+                
+            }
+            
+            @media only screen and (max-width: 700px) {
+            iframe{
+                height: 320px;
+                width: 400px;
+            }
+            p{
+                font-size: 2rem;
+            }
+            Logo{
+                width: 360px;
+                height: 120px;
+                bottom: 40px;  
+            }
+            html{
+            font-size: 80%;
+        }
+        article, article p, .tip p {
+                font-size: 20px;
+                width: 90%;
+            }
+            
+           
+        }
+        @media only screen and (max-width: 550px) {
+           
+           .nav [type=submit]{
+                    font-size: 95%;
+                }
+                .Logo{
+                width: 300px;
+                height: 100px;
+                bottom: 30px;  
+            }
+            iframe{
+                height: 200px;
+                width: 300px;
+            }
+               
+            .footer p{
+           font-size: 1.3rem;
+        } 
+        article, article p, .tip p{
+                font-size: 18px;
+                width: 90%;
+            }
+             html{
+            font-size: 50%;
+        }
+        
+        }
+        @media only screen and (max-width: 400px) {
+           
+           .nav [type=submit]{
+                    font-size: 95%;
+                }
+                .Logo{
+                width: 240px;
+                height: 80px;
+                bottom: 25px;  
+            }
+            article, article p{
+                font-size: 12px;
+                width: 90%;
+            }
+            iframe{
+                height: 200px;
+                width: 250px;
+            }
+            
+            
+               
+            .footer p{
+           font-size: 1.3rem;
+        }
+        }
             
             
 

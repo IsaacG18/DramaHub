@@ -7,27 +7,52 @@ switch ($function) {
                     
                     case "Delete":
                        
-                        
-                    $query = $con->prepare(""
+                   
+                    $Dquery = $con->prepare(""
                             . "DELETE FROM users WHERE userID = :userID;");
-                   $successes = $query-> execute([
-                        ':userID' => $userID
+                   $successes = $Dquery-> execute([
+                        'userID' => $id
                             ]);
                     
                     
                     $queryU = $con->prepare(""
                     . "Select * FROM users WHERE userID = :userID;"
                     );
-                    $queryU -> execute([$username]);
+                    $queryU -> execute(['userID' =>$id]);
                     $users = $queryU->fetch(PDO::FETCH_OBJ);
                     
                         if(!$users){
-                          echo "Account was deleted successfully";
+                          echo "Account was deleted successfully $id";
                            
                         }else{
-                          echo "Account was deleted failed";
+                          echo "Account deleted was in invalid $id";
                         }
                     
+                        break;
+            case "Sign-Up":
+                    $Cquery = $con->prepare(""
+           . "INSERT INTO users(firstName, lastName, username, email, password, Attemps)"
+           . " VALUES (:firstName, :lastName, :username, :email, :password, :attemps);");
+           
+           $created = $Cquery-> execute([
+                'firstName' => $FN,
+                'lastName' => $LN,
+                'username' => $UN,
+                'password' => $PW,
+                'email' => $EM,
+                'attemps' => 0
+           ]);
+           $user_id = $con -> lastInsertId();
+            $queryID = $con->prepare(""
+                    . "Select * FROM users WHERE userID = $user_id"
+                    );
+             $queryID -> execute([$user_id]);
+            $usersID = $queryID->fetch(PDO::FETCH_OBJ);
+           if($usersID){
+           echo "$user_id Username and Email are free";
+            }else{
+                echo "Account failed to update";
+            }
                         break;
                     case "Update":
 

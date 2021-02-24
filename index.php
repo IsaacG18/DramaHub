@@ -14,20 +14,16 @@
     
     <?php
     $userID = "";
-//     if(isset( $_COOKIE["UserID"])){
-//         echo $_COOKIE["UserID"];
-//         $userID = $_COOKIE["UserID"];
-//
-//     }else{
-//         $userID = 1;
-//     }
-    if(isset( $_GET["UserID"])){
-         $userID = $_GET["UserID"];
+    if(isset($_COOKIE["user"]) && $_COOKIE["user"] != ''){
+         $userID = $_COOKIE["user"];
      }else{
          $userID = 1;
      }
     ?>
     <body>
+               
+
+    
         <div class = "banner">
             <img class = "Logo" src="img/Logo5.png"/>
             <?php
@@ -42,7 +38,7 @@
                 <button class = 'SignUp' type='submit'>Sign Up</button>
                 </form>";
             }else{
-                echo"<form action='index.php' method='POST'>
+                echo"<form action='SignOut.php' method='POST'>
                 <button class = 'SignOut' type='submit'>Sign Out</button>
                 </form>
                 <form action='Delete.php' method='POST'>
@@ -54,7 +50,7 @@
             ?>
             
         </div>
-        
+     
          <div class = "nav">
             <?php echo" <form action='index.php' method='GET'>
                  <input name= 'UserID' type='hidden' value='$userID'>
@@ -80,22 +76,27 @@
         <div class = "Welcome">
             <h1>Welcome To Drama Hub</h1>
             
-            <iframe width= "600px" height="300px" src="https://www.youtube.com/embed/EQFwooZpbOc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe src="https://www.youtube.com/embed/EQFwooZpbOc" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
         <hr>
         <div class = "goal">
             <h1>Drama Hub's mission</h1>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+                Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </p>
         </div>
-        <hr>
+        <span id="Cal"><hr></span>
+        
        
         <div class = "firstColumn">
+           
           <div class="container">
+               
       <div class="calendar">
         <div class="month">
           <i class="fas fa-angle-left prev"></i>
           <div class="date">
-            <h1></h1>
+              <h1><a href="datesdisplay.php"></a></h1>
             <p></p>
           </div>
           <i class="fas fa-angle-right next"></i>
@@ -110,14 +111,18 @@
           <div>Sat</div>
         </div>
         <div class="days"></div>
-      </div>
+      </div>    
     </div>
+            
+           
+            
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>       
     <script src="js/index.js"></script>
     <div class = "show">
-              <img src="img/homeAdd.jpg" width ="100%" height="300px" alt="alt"/>
+              <img src="img/homeAdd.jpg"  alt="alt"/>
               
-              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </p>
+              <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
+                  Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </p>
           </div>
           </div>
          
@@ -129,7 +134,6 @@
             
           
             <div class = "highlights">
-                
               <div class="flip-box">
               <div class="flip-box-inner">
                 <div class="flip-box-front">
@@ -169,7 +173,8 @@
                 </div>
             </div>
            </div>
-         </div>     
+         </div> 
+         
         </div>
          <div class = "footer">
              <div class = "piller">
@@ -213,7 +218,7 @@
                 margin: 0px;
                 padding: 0px;
                 max-width: 1200px;
-                min-width: 800px;
+                min-width: 350px;
                 margin: auto;
                 background-color: #08080c;
                 border: solid 4px #ff0429;
@@ -296,7 +301,7 @@
                 display: flex;
                 justify-content: center;
                 align-items: center;
-               
+                
                 margin-left: 4%;
             }
             .show{
@@ -304,12 +309,19 @@
                 margin: 0px auto;
                 
             }
+            .show img{
+                width: 100%;
+                margin: 0px auto;
+                height: auto;
+            } 
             .show p, .show img{
                 display: block;
             }
             .welcome iframe{
                 margin: auto;
                 display:block;
+                width: 80%;
+                height: 450px
             }
             .welcome h1{
                 text-align: center;
@@ -337,21 +349,12 @@
             }
             .secondColumn{
                 margin: 3px auto;
-                width: 90%;
+                width: 95%;
+                height: 300px;
                 
             }
             
-            .highlights{
-                width: 100%;
-                margin: 3px auto;
-                display: inline-flex;
-               
-            }
             
-            .highlights image{
-                margin: 10px auto;
-                
-            }
             .piller{
                 width: 32%;
                 margin: 3px auto;
@@ -366,6 +369,7 @@
             .footer p{
                 margin: 10px;
             }
+            
             * {
   margin: 0;
   padding: 0;
@@ -402,12 +406,13 @@ html {
   cursor: pointer;
 }
 
-.month h1 {
+.month a {
   font-size: 3rem;
   font-weight: 400;
   text-transform: uppercase;
   letter-spacing: 0.2rem;
   margin-bottom: 1rem;
+  color: #ead700;
 }
 
 .month p {
@@ -466,62 +471,81 @@ html {
 .today {
   background-color: #ff0429;
 }
-.flip-box {
-  
-  width: 100%;
-  height: 300px;
-  perspective: 1000px;
-  
-}
-.highlights img{
-                min-height: 225px;
-        }
+            .highlights{
+                width: 100%;
+                margin: 3px auto;
+                display: inline-flex;
+            }
+            .flip-box-inner p{
+                font-size: 1.5rem;
+            }           
+            .highlights img{
+                width: 300px;
+                height: 200px;
+            }
+            .flip-box-front, .flip-box-back,.flip-box {   
+                width: 300px;
+                height: 200px;
+            }
+            .flip-box {
+              margin: auto;
+              perspective: 1000px;
+            }
+            .flip-box-inner {
+              position: relative;
 
-.flip-box-inner {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  text-align: center;
-  transition: transform 0.8s;
-  transform-style: preserve-3d;
-}
+              text-align: center;
+              transition: transform 0.8s;
+              transform-style: preserve-3d;
+            }
+            .flip-box:hover .flip-box-inner {
+              transform: rotateY(180deg);
+            }
+            .flip-box-front, .flip-box-back {
+              position: absolute;
+              -webkit-backface-visibility: hidden;
+              backface-visibility: hidden;
+            }
+            .flip-box-front {
 
-.flip-box:hover .flip-box-inner {
-  transform: rotateY(180deg);
+            }
+            .flip-box-back {
+              background-color: #555555;
+              color: #fefeff;
+              transform: rotateY(180deg);
+            }
+            
+            
+@media only screen and (max-width: 1000px) {
+    .highlights img{
+               
+                width: 240px;
+                height: 160px;
+                
+            }
+            .flip-box-front, .flip-box-back,.flip-box {
+                width: 240px;
+                height: 160px;
+            }
 }
-
-.flip-box-front, .flip-box-back {
-  position: absolute;
-  width: 100%;
-  height: 225px;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
-}
-
-.flip-box-front {
-  
-}
-
-.flip-box-back {
-  background-color: #555555;
-  color: #fefeff;
-  transform: rotateY(180deg);
-}
-
 @media only screen and (max-width: 800px) {
   .highlights{
                 display: block;
                 width: 80%;
-       
+                margin: auto;
+                
+            }
+            .welcome iframe{
+                width: 90%;
+                height: 300px
             }
             .highlights img{
                 height: 400px;
                 width: auto;
-                width: 95%;
+                width: 100%;
                 margin: auto;
             }
             .flip-box-front, .flip-box-back,.flip-box {
-
             height: 400px;
             width: 100%;
             margin: 0;
@@ -538,9 +562,9 @@ html {
             }
             .container{
                 width: 100%;
-                height: 500px;
-                margin-bottom: 20px;
-                margin: 10px 0px 20px 0px;
+                height: 450px;
+                margin: 40px 0 40px 0;
+                
             }
             html{
                 font-size: 60%;
@@ -550,11 +574,127 @@ html {
                 width: 80%;
                 
             }
-            .show img{
-                height: 400px;
+            .secondColumn{
+                height: 1300px
             }
             
+            
 }
+            
+            @media only screen and (max-width: 700px) {
+                .highlights img{
+                height: 350px;
+                width: 435px;
+            }
+            .flip-box-front, .flip-box-back,.flip-box {
+            width: 435px;
+            height: 350px;
+            }
+            .secondColumn{
+                width: 100%;
+                height: 930px
+            }
+            .flip-box {
+                margin: auto;
+            }
+            
+            }
+
+            @media only screen and (max-width: 650px) {
+              
+              .Logo{
+                width: 360px;
+                height: 120px;
+                bottom: 40px;  
+            }
+            html{
+                font-size: 40%;
+            }
+            .container{
+                height: 350px;
+                margin: 10px 0 10px 0;
+            }
+            .highlights img{
+                height: 290px;
+                width: 370px;
+            }
+            .flip-box-front, .flip-box-back,.flip-box {
+            width: 370px;
+            height: 290px;
+            
+            }
+            
+            
+}           @media only screen and (max-width: 550px) {
+                .highlights img{
+                width: 340px;
+                height: 265px;
+                margin-bottom: 30px;
+            }
+            .flip-box-front, .flip-box-back,.flip-box {
+            width: 340px;
+            height: 270px;
+            margin-bottom: 30px;
+            }
+            
+
+            }
+            
+             
+            
+            @media only screen and (max-width: 500px) {
+                .nav [type=submit]{
+                    font-size: 90%;
+                }
+                .footer p{
+                    font-size: 1.2rem;
+                }
+              
+                
+            .highlights img{
+                width: 330px;
+                height: 260px;
+            }
+            .flip-box-front, .flip-box-back,.flip-box {
+            width: 330px;
+            height: 255px;
+            }
+                .Logo{
+                width: 300px;
+                height: 100px;
+                bottom: 30px;  
+            }
+            .goal p{
+                font-size: 1.2rem;
+            }
+            .flip-box-inner p{
+                font-size: 2.5rem;
+            }
+            .secondColumn {
+                margin: 0;
+            }
+            }
+            @media only screen and (max-width: 400px) {
+            .Logo{
+                width: 270px;
+                height: 90px;
+                bottom: 30px;  
+            }
+                
+            .highlights img{
+                height: 200px;
+                width: 290px;
+            }
+            .flip-box-front, .flip-box-back,.flip-box {
+            height: 200px;
+            width: 290px;
+            }
+            .secondColumn {
+                margin: 0;
+                height: 750px
+            }
+           
+            }
 
 
         </style>
