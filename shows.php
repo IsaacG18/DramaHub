@@ -1,5 +1,6 @@
 <html>
     <head>
+        <title>Shows</title>
          <link
       href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
@@ -16,7 +17,7 @@
     $userID = "";
     $statement = "SELECT * FROM shows";
     $first = true; 
-      if(isset($_COOKIE["user"])){
+      if(isset($_COOKIE["user"])&& $_COOKIE["user"] != ''){
          $userID = $_COOKIE["user"];
      }else{
          $userID = 1;
@@ -78,17 +79,17 @@
             <img class = "Logo" src="img/Logo5.png"/>
             <?php
             if($userID == 1){
-                echo "
+                echo"
                 <form action='SignIn.php' method='POST'>
                 <input name= 'page' type='hidden' value='index'>
-                <button class = 'SignIn' type='submit'>Sign in</button>
+                <button class = 'SignIn' type='submit'>Sign In</button>
                 </form>
                 <form action='SignUp.php' method='POST'>
                 <input name= 'page' type='hidden' value='index'>
                 <button class = 'SignUp' type='submit'>Sign Up</button>
                 </form>";
             }else{
-                echo"<form action='index.php' method='POST'>
+                echo"<form action='SignOut.php' method='POST'>
                 <button class = 'SignOut' type='submit'>Sign Out</button>
                 </form>
                 <form action='Delete.php' method='POST'>
@@ -239,7 +240,7 @@
              </div>
              <div class = "piller">
                  <p>Contact</p>
-                 <p>Emailcontact@gmail.com</p>
+                 <p>Email@gmail.com</p>
                  <p>075363451323</p>
                  <p>@DramaHub</p>
              </div>
@@ -293,7 +294,7 @@ html {
                 margin: 0px;
                 padding: 0px;
                 max-width: 1200px;
-                min-width: 290px;
+                min-width: 350px;
                 margin: auto;
                 background-color: #08080c;
                 border: solid 4px #ff0429;
@@ -487,11 +488,12 @@ html {
                     font-size: 90%;
                 }
                 .Logo{
-                width: 300px;
-                height: 100px;
+                width: 270px;
+                height: 90px;
                 bottom: 30px;  
             }
             }
+           
     
             
        @media (min-aspect-ratio: 2/1) {

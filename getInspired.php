@@ -1,5 +1,6 @@
 <html>
     <head>
+        <title>Get Inspired</title>
          <link
       href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
@@ -11,7 +12,7 @@
     <?php
     include_once 'dbconnection.php';
     $userID = "";
-      if(isset($_COOKIE["user"])){
+      if(isset($_COOKIE["user"])&& $_COOKIE["user"] != ''){
          $userID = $_COOKIE["user"];
      }else{
          $userID = 1;
@@ -42,14 +43,14 @@
                 echo"
                 <form action='SignIn.php' method='POST'>
                 <input name= 'page' type='hidden' value='index'>
-                <button class = 'SignIn' type='submit'>Sign in</button>
+                <button class = 'SignIn' type='submit'>Sign In</button>
                 </form>
                 <form action='SignUp.php' method='POST'>
                 <input name= 'page' type='hidden' value='index'>
                 <button class = 'SignUp' type='submit'>Sign Up</button>
                 </form>";
             }else{
-                echo"<form action='index.php' method='POST'>
+                echo"<form action='SignOut.php' method='POST'>
                 <button class = 'SignOut' type='submit'>Sign Out</button>
                 </form>
                 <form action='Delete.php' method='POST'>
@@ -120,6 +121,7 @@
                   
                   $output .="<div class = 'art'> <img src='$Item->img'/> <br> "
                           . "<form form action='artWork.php' method='GET'>"
+                          . "<h3>$Item->title</h3>"
                           . "<input name='artID' type='hidden' value='$Item->artID'>"
                           . "<input name = 'submit' type='submit' value='$Item->title'>"
                           . "</form>"
@@ -166,11 +168,13 @@
          }
      
         $output .= "</div>";
+        if(count($user) > $Ucount){
             $Ucount += 6;
         $output .= "<div class = 'loadmore'><form action='getInspired.php' method='GET'>"
                 . "<input name='Ucount' type='hidden' value='$Ucount'>"
                 . "<input name = 'submit' type='submit' value='Load More'>"
                 . "</form></div>";
+        }
             echo $output;
         
         ?>
@@ -202,12 +206,15 @@
                     }
             }
          }
-         $Wcount += 6;
+         
          $output .= "</div>";
+         if(count($work) > $Wcount){
+             $Wcount += 6;
         $output .= "<div class = 'loadmore'><form action='getInspired.php' method='GET'>"
                 . "<input name='Wcount' type='hidden' value='$Wcount'>"
                 . "<input name = 'submit' type='submit' value='Load More'>"
                 . "</form></div>";
+        }
         
         
             echo $output;
@@ -241,12 +248,17 @@
                     }
             }
          }
-         $Acount += 6;
+         
          $output .= "</div>";
+         if(count($artist) > $Acount){
+             $Acount += 6;
         $output .= "<div class = 'loadmore'><form action='getInspired.php' method='GET'>"
                 . "<input name='Acount' type='hidden' value='$Acount'>"
                 . "<input name = 'submit' type='submit' value='Load More'>"
                 . "</form></div>";
+         }
+         
+         
         
         
             echo $output;
@@ -268,7 +280,7 @@
              </div>
              <div class = "piller">
                  <p>Contact</p>
-                 <p>Emailcontact@gmail.com</p>
+                 <p>Email@gmail.com</p>
                  <p>075363451323</p>
                  <p>@DramaHub</p>
              </div>
@@ -388,9 +400,13 @@ html {
             h1{
                 font-size: 5rem;
             }
-            p, h3{
+            p{
                 color: #fefeff; 
                 font-size: 3rem;
+            }
+            h3{
+                color: #fefeff;
+                font-size: 2.8rem;
             }
           
             .piller{
@@ -464,7 +480,7 @@ html {
                 margin: 5px 0;
             }
             
-           @media only screen and (max-width: 800px) {
+           @media only screen and (max-width: 900px) {
         .blocks{
             display: block;
         }
@@ -549,11 +565,7 @@ html {
                 height: 100px;
                 bottom: 30px;  
             }
-                .Logo{
-                width: 300px;
-                height: 100px;
-                bottom: 30px;  
-            }
+               
             .footer p{
            font-size: 1.3rem;
         }
@@ -585,6 +597,11 @@ html {
         iframe{
                 width: 250px;
                 height: 187.5px;
+            }
+             .Logo{
+                width: 270px;
+                height: 90px;
+                bottom: 28px;  
             }
     }
        

@@ -25,7 +25,9 @@ $(document).ready(function () {
                             $('input[type="password"]').css({"border": "2px solid red", "box-shadow": "0 0 5px "});
                             
                         }  else if (data.includes('successfully')) {
-                            window.location.href = "index.php";;
+                            document.cookie = "user= ; expires = Thu 01 Jan 00:00:00 GMT";
+                            window.location.href =  "index.php";
+                            
                         } else {
                             alert('Check with system admin, report this message'+ data);
                         }

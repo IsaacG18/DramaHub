@@ -28,10 +28,10 @@ $(document).ready(function () {
                              $('input[type="password"]').css({"border": "2px solid red", "box-shadow": "0 0 5px red"});
                             document.getElementById("wrong").innerHTML = data;
                         } else if (data.includes('free')) {
-                            var num = data.split(" ");
-                            window.location.href = "index.php?UserID=" + num[0];
+                            
+                            window.location.href = "SignIn.php";
                         } else {
-                            alert('Check with system admin, report this message login.js 26 '+ data);
+                            alert('Check with system admin, report this message'+ data);
                         }
                     });
         }

@@ -31,7 +31,7 @@
                 echo"
                 <form action='SignIn.php' method='POST'>
                 <input name= 'page' type='hidden' value='index'>
-                <button class = 'SignIn' type='submit'>Sign in</button>
+                <button class = 'SignIn' type='submit'>Sign In</button>
                 </form>
                 <form action='SignUp.php' method='POST'>
                 <input name= 'page' type='hidden' value='index'>
@@ -117,7 +117,7 @@
            
             
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>       
-    <script src="js/index.js"></script>
+    <script src="js/calendar.js"></script>
     <div class = "show">
               <img src="img/homeAdd.jpg"  alt="alt"/>
               
@@ -190,7 +190,7 @@
              </div>
              <div class = "piller">
                  <p>Contact</p>
-                 <p>Emailcontact@gmail.com</p>
+                 <p>Email@gmail.com</p>
                  <p>075363451323</p>
                  <p>@DramaHub</p>
              </div>

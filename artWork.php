@@ -1,5 +1,6 @@
 <html>
     <head>
+        <title>Art Work</title>
        <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css"
@@ -15,7 +16,7 @@
      <?php
      include_once 'dbconnection.php';
     $userID = "";
-      if(isset($_COOKIE["user"])){
+      if(isset($_COOKIE["user"])&& $_COOKIE["user"] != ''){
          $userID = $_COOKIE["user"];
      }else{
          $userID = 1;
@@ -34,14 +35,14 @@
                 echo"
                 <form action='SignIn.php' method='POST'>
                 <input name= 'page' type='hidden' value='index'>
-                <button class = 'SignIn' type='submit'>Sign in</button>
+                <button class = 'SignIn' type='submit'>Sign In</button>
                 </form>
                 <form action='SignUp.php' method='POST'>
                 <input name= 'page' type='hidden' value='index'>
                 <button class = 'SignUp' type='submit'>Sign Up</button>
                 </form>";
             }else{
-                echo"<form action='index.php' method='POST'>
+                echo"<form action='SignOut.php' method='POST'>
                 <button class = 'SignOut' type='submit'>Sign Out</button>
                 </form>
                 <form action='Delete.php' method='POST'>
@@ -103,7 +104,7 @@
              </div>
              <div class = "piller">
                  <p>Contact</p>
-                 <p>Emailcontact@gmail.com</p>
+                 <p>Email@gmail.com</p>
                  <p>075363451323</p>
                  <p>@DramaHub</p>
              </div>
