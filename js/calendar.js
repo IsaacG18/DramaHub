@@ -11,7 +11,7 @@ const fillCalendar = (firstDayIndex, prevLastDay, nextDays, monthDays) => {
    
             $.post("FindDate.php", {year: year, month:  month, days: days},
                      function (data) {  
-                        if (data.includes('<div>')) {
+                        if (data.includes('</div>')) {
                             let days = "";
                             for (let x =firstDayIndex; x > 0; x--) {
                             days += `<div class="prev-date">${prevLastDay - x + 1}</div>`;

@@ -26,9 +26,13 @@ $query = $con ->prepare("SELECT * FROM dates  WHERE YEAR(date) =:year and MONTH(
                     }
                 }
                 if($state == false){
-               $output .= "<div>$i</div>";
+                    if($year == date("Y") && $month == date("m") && $i == date("d")){
+                        $output .= "<div class='today'>$i</div>";
+                    }else{
+                        $output .= "<div>$i</div>";        
+                    }
                 }else if($state == true){
-                 $output .= "<div class='today'>$i</div>";
+                    $output .= "<div class='today'>$i</div>";
                 }
             }
             echo $output;

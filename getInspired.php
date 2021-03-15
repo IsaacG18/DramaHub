@@ -1,6 +1,7 @@
 <html>
     <head>
         <title>Get Inspired</title>
+        <link rel="stylesheet" href="css/Main.css">
          <link
       href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
@@ -11,12 +12,7 @@
     
     <?php
     include_once 'dbconnection.php';
-    $userID = "";
-      if(isset($_COOKIE["user"])&& $_COOKIE["user"] != ''){
-         $userID = $_COOKIE["user"];
-     }else{
-         $userID = 1;
-     }
+   
      if(isset($_GET['Acount'])){
             $Acount = $_GET['Acount'];
             }else{
@@ -36,58 +32,20 @@
             
     ?>
     <body>
-        <div class = "banner">
-            <img class = "Logo" src="img/Logo5.png"/>
-            <?php
-            if($userID == 1){
-                echo"
-                <form action='SignIn.php' method='POST'>
-                <input name= 'page' type='hidden' value='index'>
-                <button class = 'SignIn' type='submit'>Sign In</button>
-                </form>
-                <form action='SignUp.php' method='POST'>
-                <input name= 'page' type='hidden' value='index'>
-                <button class = 'SignUp' type='submit'>Sign Up</button>
+        <?php include_once 'header.php';?>
+         <?php if($userID != 1){
+            echo"<form action='Uploader.php' method='POST'>
+                    <button class = 'upload' type='submit'>Up-load</button>
                 </form>";
             }else{
-                echo"<form action='SignOut.php' method='POST'>
-                <button class = 'SignOut' type='submit'>Sign Out</button>
-                </form>
-                <form action='Delete.php' method='POST'>
-                <input name= 'UserID' type='hidden' value='$userID'>
-                <input name= 'page' type='hidden' value='index'>
-                <button class = 'Delete' type='submit'>Delete</button>
-                </form>";
+            echo"<form method='POST'>
+                    <button class = 'upload' type='submit'>Up-load</button>
+                </form>";    
             }
-            ?>
-            
-        </div>
+        ?> 
+         <div class = "stack">
+         <h1>Get Inspired</h1>
         
-         <div class = "nav">
-            <?php echo" <form action='index.php' method='POST'>
-                 <input name= 'UserID' type='hidden' value='$userID'>
-                <button class = 'first' type='submit'>Home</button>
-             </form>
-             <form action='Shows.php' method='POST'>
-              <input name= 'UserID' type='hidden' value='$userID'>
-                <button class = 'other' type='submit'>Shows</button>
-             </form>
-             <form action='Monologues.php' method='POST'>
-              <input name= 'UserID' type='hidden' value='$userID'>
-                <button class = 'other' type='submit'>Monologue</button>
-             </form>
-             <form action='DramaSchool.php' method='POST'>
-              <input name= 'UserID' type='hidden' value='$userID'>
-                <button class = 'other' type='submit'>Drama School</button>
-             </form>
-             <form action='getInspired.php' method='POST'>
-              <input name= 'UserID' type='hidden' value='$userID'>
-                <button class = 'other' type='submit'>Get Inspired</button>
-             </form>"; ?>
-            </div>
-         <div class = "firstColumn">
-         <h1>Intro To Monologues</h1>
-
               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </p>
               
               <iframe src="https://www.youtube.com/embed/64UW3Gmp5VA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -118,8 +76,8 @@
                 
                 foreach($Items as $Item){
                     
-                  
-                  $output .="<div class = 'art'> <img src='$Item->img'/> <br> "
+                  $img = 'uploads/'.($Item->upImg);
+                  $output .="<div class = 'art'> <img src='$img'/> <br> "
                           . "<form form action='artWork.php' method='GET'>"
                           . "<h3>$Item->title</h3>"
                           . "<input name='artID' type='hidden' value='$Item->artID'>"
@@ -155,8 +113,9 @@
                 
                 foreach($users as $user){
                     
-                if($Ucount > $u){    
-                  $output .="<div class = 'art'> <img src='$user->img'/> <br> "
+                if($Ucount > $u){  
+                    $img = 'uploads/'.($user->upImg);
+                  $output .="<div class = 'art'> <img src='$img'/> <br> "
                           . "<form form action='artWork.php' method='GET'>"
                           . "<h3>$user->title</h3>"
                           . "<input name='artID' type='hidden' value='$user->artID'>"
@@ -168,7 +127,7 @@
          }
      
         $output .= "</div>";
-        if(count($user) > $Ucount){
+        if(count($users) > $Ucount){
             $Ucount += 6;
         $output .= "<div class = 'loadmore'><form action='getInspired.php' method='GET'>"
                 . "<input name='Ucount' type='hidden' value='$Ucount'>"
@@ -196,7 +155,8 @@
             if($success){
                 foreach($works as $work){
                     if($Wcount > $w){
-                  $output .="<div class = 'art'> <img src='$work->img'/> <br>"
+                        $img = 'uploads/'.($work->upImg);
+                  $output .="<div class = 'art'> <img src='$img'/> <br>"
                           . "<h3>$work->title</h3>"
                           . "<form form action='artWork.php' method='GET'>"
                           . "<input name='artID' type='hidden' value='$work->artID'>"
@@ -208,7 +168,7 @@
          }
          
          $output .= "</div>";
-         if(count($work) > $Wcount){
+         if(count($works) > $Wcount){
              $Wcount += 6;
         $output .= "<div class = 'loadmore'><form action='getInspired.php' method='GET'>"
                 . "<input name='Wcount' type='hidden' value='$Wcount'>"
@@ -238,7 +198,8 @@
             if($success){
                 foreach($artist as $art){
                     if($Acount > $a){
-                  $output .="<div class = 'art'> <img src='$art->img'/> <br> "
+                        $img = 'uploads/'.($art->upImg);
+                  $output .="<div class = 'art'> <img src='$img' <br> "
                           . "<h3>$art->title</h3>"
                           . "<form form action='artWork.php' method='GET'>"
                           . "<input name='artID' type='hidden' value='$art->artID'>"
@@ -266,160 +227,8 @@
         ?>
             </div>
             
-          <div class = "footer">
-             <div class = "piller">
-                 <p>Partnerships</p>
-                 <p>National Theatre</p>
-                 <p>Drama School</p>
-                 <p>Theatre Companies</p> 
-             </div>
-             <div class = "piller">
-                 <p>Mission Statment</p>
-                 <p>Covid-19</p>
-                 <p>Donate</p>
-             </div>
-             <div class = "piller">
-                 <p>Contact</p>
-                 <p>Email@gmail.com</p>
-                 <p>075363451323</p>
-                 <p>@DramaHub</p>
-             </div>
-              <img class = "LogoF" src="img/Logo5.png"/>
-         </div>
+          <?php include_once 'footer.php';?>
         <style>
-             * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'PT Sans', sans-serif;
-}
-
-html {
-  font-size: 50%;
-}
-            html{
-                margin: 0px; 
-                background-color: #7c7c7c;
-               
-            }
-            p, h3, h5{
-                color: #fefeff; 
-            }
-            h1{
-                color: #ead700;
-                text-shadow: 0 0.15rem 0.15rem rgba(200, 200, 200, 0.5);
-                text-align: center;
-            }
-            .Logo{
-                width: 480px;
-                height: 160px;
-                float: left;
-                position: relative;
-                margin: 0;
-                bottom: 52px;
-                
-                
-            }
-            .LogoF{
-                width: 180px;
-                height: 60px;
-                
-                position: relative;
-                margin: 0;
-                bottom: 11px;
-               
-            }
-            body{
-                margin: 0px;
-                padding: 0px;
-                max-width: 1200px;
-                min-width: 350px;
-                margin: auto;
-                background-color: #08080c;
-                border: solid 4px #ff0429;
-            }
-            .banner{
-                width: 100%;
-                height: 550px;
-                margin: 0px auto;
-                background-image: url("img/Banner.jpg");
-                background-repeat: no-repeat; 
-                background-size: cover;
-                background-position: bottom;
-            }
-            .banner h1{
-                padding-left: 10%;
-                color: #fefeff;
-                display: inline-flex;
-                margin: 3px;
-            }
-            .banner button{
-                float: right;
-                margin: 5px;
-                background-color: #08080c;
-                color: #fefeff;
-                text-align: center;
-                border-radius: 10px;
-            }
-            .nav{
-               background-color: #ff0429;
-                margin: 0;
-                
-            }
-            .first{
-               border: none; 
-            }
-            .other{
-                 border: none;
-               border-left: solid 2.5px #ead700;
-            }
-            .nav form{
-               width: 19%;
-              background-color: #ff0429;
-              color: #fefeff;
-              margin: auto;
-              display:inline-flex;
-            }
-            .nav [type=submit]{
-              width: 100%;
-              background-color: #ff0429;
-              color: #fefeff;
-              text-align: center;
-               text-decoration: none;
-               cursor: pointer;
-                 
-            }
-            hr{
-                width: 90%;
-                margin: 20px auto;
-
-                background-color: #ff0429;
-                height: 3px;
-                border: none;
-            }
-            h1{
-                font-size: 5rem;
-            }
-            p{
-                color: #fefeff; 
-                font-size: 3rem;
-            }
-            h3{
-                color: #fefeff;
-                font-size: 2.8rem;
-            }
-          
-            .piller{
-                width: 32%;
-                margin: 3px auto;
-                display: inline-block;
-               
-            }
-            .footer{
-                background-color: #ff0429;
-                height: 200px;
-                
-            }
             .blocks{
                 width: 90%;
                 margin: 10px 0 10px 5%;
@@ -438,21 +247,11 @@ html {
             .art{
                 height: 290px;
             }
-         
-            
-            
-            .firstColumn{
-                margin: 5px;
-                text-align: center;
-                margin: 3px auto;
-                width: 70%;
-            }
             .loadmore form{
-
                 text-align: center;  
                 margin: 10px;
             }
-            .loadmore input[type=submit], .search input[type=submit]{
+            .loadmore input[type=submit], .search input[type=submit], .upload{
                 color: #fefeff;
                 background-color: #ff0429;
                 border:#ead700 2px solid;
@@ -463,10 +262,6 @@ html {
                 float: left;
                 margin: 10px 2px;
                 
-            }
-            iframe{
-                width: 600px;
-                height: 450px;
             }
             .art input[type=submit]{
                 color: #fefeff;
@@ -479,6 +274,10 @@ html {
                 border-radius: 5px;
                 margin: 5px 0;
             }
+            .upload{
+               float: left; 
+               margin: 10px;
+            }
             
            @media only screen and (max-width: 900px) {
         .blocks{
@@ -490,33 +289,14 @@ html {
             margin: 10px auto;
         }
         .blocks h3{
-            
             margin: 20px;
-        }
-        h1{
-      
-            margin-left: 10%;
-        }
-        
-        .firstColumn{
-            width: 90%;
-        }
-        .firstColumn iframe{
-            width:70%;
         }
         .art img{
                height: 400px;
                width: 500px;
                
             }
-            p{
-                font-size: 2.5rem;
-            }
-            iframe{
-                width: 450px;
-                height: 337.5px;
-            }
-            
+           
            }
         @media only screen and (max-width: 650px) {
             .art{
@@ -528,20 +308,7 @@ html {
                height: 360px;
                width: 450px;    
             }
-            p{
-                font-size: 2rem;
-            }
-            Logo{
-                width: 360px;
-                height: 120px;
-                bottom: 40px;  
-            }
-            iframe{
-                width: 400px;
-                height: 300px;
-            }
             
-           
         }
         @media only screen and (max-width: 550px) {
             .art{
@@ -553,25 +320,8 @@ html {
                height: 280px;
                width: 350px;    
             }
-            iframe{
-                width: 300px;
-                height: 225px;
-            }
-           .nav [type=submit]{
-                    font-size: 95%;
-                }
-                .Logo{
-                width: 300px;
-                height: 100px;
-                bottom: 30px;  
-            }
-               
-            .footer p{
-           font-size: 1.3rem;
-        }
             
-        }
-    
+        }    
     @media only screen and (max-width: 550px) {
             .art{
             height: 400px;
@@ -592,16 +342,6 @@ html {
         .art img{
                height: 200px;
                width: 250px;    
-            }
-        
-        iframe{
-                width: 250px;
-                height: 187.5px;
-            }
-             .Logo{
-                width: 270px;
-                height: 90px;
-                bottom: 28px;  
             }
     }
        

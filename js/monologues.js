@@ -6,12 +6,14 @@ $(document).ready(function () {
       
     if(show === false){                        
         $('.sideBar').css("width", "100%");
+        $('.sideBar form').css("visibility", "visible");
         $('.sideBar').css("visibility", "visible");
         $('.monologues').css("width", "80%");
         show = true;
     }else if(show === true){
-         $('.monologues').css("width", "90%");;
+        $('.monologues').css("width", "90%");;
         $('.sideBar').css("width", "0");
+        $('.sideBar form').css("visibility", "hidden");
         $('.sideBar').css("visibility", "hidden");
         show = false;
     }
@@ -23,14 +25,16 @@ $(document).ready(function () {
       console.log("Change");
       $('.monologues').css("width", "90%");
       $('.sideBar').css("width", "0");
+      $('.sideBar form').css("visibility", "hidden");
       $('.sideBar').css("visibility", "hidden");
       show = false;
     
   } else {
       console.log("Change");
       $('.monologues').css("width", "79%");
-     // $('.monologues').css("visibility", "visible");
+      $('.monologues').css("visibility", "visible");
       $('.sideBar').css("width", "20%");
+      $('.sideBar form').css("visibility", "visible");
       $('.sideBar').css("visibility", "visible");
   }
 }

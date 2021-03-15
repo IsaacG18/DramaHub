@@ -1,6 +1,8 @@
 <html>
     <head>
         <title>Shows</title>
+        <link rel="stylesheet" href="css/Main.css">
+        <link rel="stylesheet" href="css/sidebar.css">
          <link
       href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
@@ -9,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=PT+Sans&display=swap" rel="stylesheet">
     
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>       
-    <script type="text/javascript" src="js/show.js"></script>
+    <script type="text/javascript" src="js/sidebar.js"></script>
     </head>
     
     <?php
@@ -17,11 +19,7 @@
     $userID = "";
     $statement = "SELECT * FROM shows";
     $first = true; 
-      if(isset($_COOKIE["user"])&& $_COOKIE["user"] != ''){
-         $userID = $_COOKIE["user"];
-     }else{
-         $userID = 1;
-     }
+      
       if(isset($_GET['Age']) and $_GET['Age'] !== "AnyAge" ){
         $age = $_GET['Age'];
        if($first){
@@ -75,61 +73,62 @@
      }
     ?>
     <body>
-        <div class = "banner">
-            <img class = "Logo" src="img/Logo5.png"/>
-            <?php
-            if($userID == 1){
-                echo"
-                <form action='SignIn.php' method='POST'>
-                <input name= 'page' type='hidden' value='index'>
-                <button class = 'SignIn' type='submit'>Sign In</button>
-                </form>
-                <form action='SignUp.php' method='POST'>
-                <input name= 'page' type='hidden' value='index'>
-                <button class = 'SignUp' type='submit'>Sign Up</button>
-                </form>";
-            }else{
-                echo"<form action='SignOut.php' method='POST'>
-                <button class = 'SignOut' type='submit'>Sign Out</button>
-                </form>
-                <form action='Delete.php' method='POST'>
-                <input name= 'UserID' type='hidden' value='$userID'>
-                <input name= 'page' type='hidden' value='index'>
-                <button class = 'Delete' type='submit'>Delete</button>
-                </form>";
-            }
-            ?>
-            
-        </div>
-        
-         <div class = "nav">
-            <?php echo" <form action='index.php' method='POST'>
-                 <input name= 'UserID' type='hidden' value='$userID'>
-                <button class = 'first' type='submit'>Home</button>
-             </form>
-             <form action='Shows.php' method='POST'>
-              <input name= 'UserID' type='hidden' value='$userID'>
-                <button class = 'other' type='submit'>Shows</button>
-             </form>
-             <form action='Monologues.php' method='POST'>
-              <input name= 'UserID' type='hidden' value='$userID'>
-                <button class = 'other' type='submit'>Monologue</button>
-             </form>
-             <form action='DramaSchool.php' method='POST'>
-              <input name= 'UserID' type='hidden' value='$userID'>
-                <button class = 'other' type='submit'>Drama School</button>
-             </form>
-             <form action='getInspired.php' method='POST'>
-              <input name= 'UserID' type='hidden' value='$userID'>
-                <button class = 'other' type='submit'>Get Inspired</button>
-             </form>"; ?>
-            </div>
-            </div>
-        
-        <div class = "BannerAd">
-            
-        </div>
-        <h1 id = "showTitle">Shows</h1>
+        <?php include_once 'header.php';?>
+<div class="slideshow-container">
+
+<div class="mySlides fade">
+    <div class="S1">
+  <div class="numbertext">1 / 3</div>
+  
+  <div class="text">Othello</div>
+  </div>
+</div>
+
+<div class="mySlides fade">
+  <div class="S2">
+    <div class="numbertext">2 / 3</div>
+    <div class="text">Merchant Of Venice's</div>
+  </div>
+</div>
+
+<div class="mySlides fade">
+ <div class="S3">
+  <div class="numbertext">3 / 3</div>
+  <div class="text">Cat on a Hot Tin Roof</div>
+ </div>
+</div>
+
+</div>
+
+<br>
+
+<div style="text-align:center">
+  <span class="dot"></span> 
+  <span class="dot"></span> 
+  <span class="dot"></span> 
+</div>
+<script>
+var slideIndex = 0;
+showSlides();
+
+function showSlides() {
+  var i;
+  var slides = document.getElementsByClassName("mySlides");
+  var dots = document.getElementsByClassName("dot");
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";  
+  }
+  slideIndex++;
+  if (slideIndex > slides.length) {slideIndex = 1}    
+  for (i = 0; i < dots.length; i++) {
+    dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";  
+  dots[slideIndex-1].className += " active";
+  setTimeout(showSlides, 2000); // Change image every 2 seconds
+}
+</script>
+        <h1 id = "Title">Shows</h1>
                       <img src="img/menu.png" id = "sideShow"/>
           <div class = "column">
  
@@ -189,7 +188,7 @@
                 </form>'; ?>
                   
           </div>
-              <div class ="showsArea">
+              <div class ="gallery">
               <?php
      
               $output = "";
@@ -226,190 +225,8 @@
                 </div>   
         </div>      
         
-          <div class = "footer">
-             <div class = "piller">
-                 <p>Partnerships</p>
-                 <p>National Theatre</p>
-                 <p>Drama School</p>
-                 <p>Theatre Companies</p> 
-             </div>
-             <div class = "piller">
-                 <p>Mission Statment</p>
-                 <p>Covid-19</p>
-                 <p>Donate</p>
-             </div>
-             <div class = "piller">
-                 <p>Contact</p>
-                 <p>Email@gmail.com</p>
-                 <p>075363451323</p>
-                 <p>@DramaHub</p>
-             </div>
-              <img class = "LogoF" src="img/Logo5.png"/>
-         </div>
+         <?php include_once 'footer.php';?>
         <style>
-             * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'PT Sans', sans-serif;
-}
-
-html {
-  font-size: 135%;
-}
-            html{
-                margin: 0px; 
-                background-color: #7c7c7c;
-               
-            }
-            p, h3, h5{
-                color: #fefeff; 
-            }
-            h1{
-                color: #ead700;
-                text-shadow: 0 0.15rem 0.15rem rgba(200, 200, 200, 0.5);
-                text-align: center;
-            }
-            .Logo{
-                width: 480px;
-                height: 160px;
-                float: left;
-                position: relative;
-                margin: 0;
-                bottom: 52px;
-                
-                
-            }
-            .LogoF{
-                width: 180px;
-                height: 60px;
-                
-                position: relative;
-                margin: 0;
-                bottom: 11px;
-             
-            }
-           
-            body{
-                margin: 0px;
-                padding: 0px;
-                max-width: 1200px;
-                min-width: 350px;
-                margin: auto;
-                background-color: #08080c;
-                border: solid 4px #ff0429;
-            }
-            .banner{
-                width: 100%;
-                height: 550px;
-                margin: 0px auto;
-                background-image: url("img/Banner.jpg");
-                background-repeat: no-repeat; 
-                background-size: cover;
-                background-position: bottom;
-            }
-            .banner h1{
-                padding-left: 10%;
-                color: #fefeff;
-                display: inline-flex;
-                margin: 3px;
-            }
-            .banner button{
-                float: right;
-                margin: 5px;
-                background-color: #08080c;
-                color: #fefeff;
-                text-align: center;
-                border-radius: 10px;
-            }
-            .nav{
-               background-color: #ff0429;
-                margin: 0;
-                font-size: 65%;
-                
-            }
-            
-            .first{
-               border: none; 
-            }
-            .other{
-                 border: none;
-               border-left: solid 2.5px #ead700;
-            }
-            .nav form{
-               width: 19%;
-              background-color: #ff0429;
-              color: #fefeff;
-              margin: auto;
-              display:inline-flex;
-            }
-            .nav [type=submit]{
-              width: 100%;
-              background-color: #ff0429;
-              color: #fefeff;
-              text-align: center;
-               text-decoration: none;
-               cursor: pointer;
-                 
-            }
-           
-            hr{
-                width: 90%;
-                margin: 20px auto;
-
-                background-color: #ff0429;
-                height: 3px;
-                border: none;
-            }
-          
-            .piller{
-                width: 32%;
-                margin: 3px auto;
-                display: inline-block;
-               
-            }
-            .footer{
-                background-color: #ff0429;
-                height: 200px;
-                
-            }
-            .BannerAd{
-                width: 100%;
-                height: 250px;
-                margin: 10px auto;
-                background-image: url("img/Drama1.jpg");
-                background-repeat: no-repeat; 
-                background-size: cover;
-                background-position: bottom;
-                    
-            }
-            .sideBar{
-               background-color: #555555;
-                margin: 0;
-                position: -webkit-sticky;
-                position: sticky;
-                top: 0;
-                height: 120vh;
-                width: 20%;
-            }
-            
-            label{
-                color: #fefeff;
-                font-size: 0.8rem;
-            }
-            form{
-                width: 100%;
-            }
-            input{
-                background-color: #fefeff;
-                color: #08080c;
-                max-width: 90%;
-                margin: 3px 4px;
-            }
-            
-            #showTitle{
-                text-align: center;
-            }
             .playImg img{
                 width: 100%;
                 height: auto;
@@ -418,104 +235,105 @@ html {
                 width: 100%;
                
             }
-            .showsArea{
-                width: 79%;
-                margin: 0 0 0 1%;
+            .gallery{
                 display: block;
-                
-                
             }
-             #sideShow{
-                width: 0%;
-                visibility: hidden;
-              }
-              
             .show{
                 display: inline-flex;
                 margin: 10px;
             }
-            .column{
-                width: 100%;
-                display: flex;
-                
-            }
+            
             .playText{
                 width:60%;
                 margin-left: 10px;
-            }
-            input[type=submit]{
-                cursor:pointer;
-                -webkit-border-radius: 5px;
-                border-radius: 5px; 
-                padding: 5px;
-                color:black;
-                background-color: #fefeff;
-               margin: 10px 0 10px 11%;
-            }
-            
-            @media only screen and (max-width: 800px) {
-            .footer{
-               font-size: 80%; 
-            }
-            
-            }
-            @media only screen and (max-width: 600px) {
-              .sideBar{
-                width: 0%;
-                visibility: hidden;
-            
-              }
-              #sideShow{
-                width: auto;
-                height: 30px;
-                visibility: visible;
-              }
-              .Logo{
-                width: 360px;
-                height: 120px;
-                bottom: 40px;  
-            }
-            html{
-                font-size: 90%;
-            }
-            .showsArea{
-                width: 90%;
-            }
-                
-            }
-            @media only screen and (max-width: 470px) {
-                .nav [type=submit]{
-                    font-size: 90%;
-                }
-                .Logo{
-                width: 270px;
-                height: 90px;
-                bottom: 30px;  
-            }
-            }
-           
-    
-            
-       @media (min-aspect-ratio: 2/1) {
-        sidebar label{
-            font-size: 20px;
-        }
-        sidebar h3{
-            font-size: 30px;
-        }
+            } 
+    .S1{
+        width: 100%;
+        height: 250px;
+        background-image: url("img/Drama1.jpg");
+        background-repeat: no-repeat; 
+        background-size: cover;
+        background-position: bottom;
     }
-    
-    @media (min-aspect-ratio: 15/6) {
-       sidebar label{
-            font-size: 15px;
-        }
-        sidebar h3{
-            font-size: 25px;
-        }
+    .S2{
+        width: 100%;
+        height: 250px;
+        background-image: url("img/Drama2.jpg");
+        background-repeat: no-repeat; 
+        background-size: cover;
+        background-position: bottom;
     }
-    
-    
+    .S3{
+        width: 100%;
+        height: 250px;
+        background-image: url("img/Drama3.jpg");
+        background-repeat: no-repeat; 
+        background-size: cover;
+        background-position: bottom;
+    }
+    .slideshow-container {
+  max-width: 1200px;
+  position: relative;
+  margin: auto;
+}
 
+/* Caption text */
+.text {
+  color: #f2f2f2;
+  font-size: 15px;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+/* The dots/bullets/indicators */
+.dot {
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.active {
+  background-color: #717171;
+}
+
+/* Fading animation */
+.fade {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+@keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+/* On smaller screens, decrease text size */
+@media only screen and (max-width: 300px) {
+  .text {font-size: 11px}
+}
         </style>
     </body>
 </html>

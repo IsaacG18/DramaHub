@@ -86,9 +86,7 @@ and open the template in the editor.
             
             
         </style>
-        <?php
-//          $page = $_POST['page'];
-        ?> 
+
         
         <div id = "box">
             <h1>Login</h1>

@@ -5,7 +5,7 @@
     $UN = $_POST['UN'];
     $EM = $_POST['EM'];
     //$PW = $_POST['PW'];
-    $PW = $password = crypt(sha1(md5($_POST['PW'])), 'XY');
+    $PW = crypt(sha1(md5($_POST['PW'])), 'XY');
     
             $queryU = $con->prepare(""
                     . "Select * FROM users WHERE username =?"

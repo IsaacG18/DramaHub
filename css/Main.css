@@ -1,0 +1,197 @@
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family: 'PT Sans', sans-serif;
+            }
+            html{
+                margin: 0px; 
+                padding: 0px;
+                background-color: #7c7c7c;
+                font-size: 50%;
+            }
+            body{
+                margin: 0px;
+                padding: 0px;
+                max-width: 1200px;
+                min-width: 350px;
+                margin: auto;
+                background-color: #08080c;
+                border: solid 4px #ff0429;
+            }
+            .banner{
+                width: 100%;
+                height: 550px;
+                margin: 0px auto;
+                background-image: url("../img/Banner.jpg");
+                background-repeat: no-repeat; 
+                background-size: cover;
+                background-position: bottom;
+            }
+            p, th, h5, li{
+                color: #fefeff; 
+                font-size: 3rem;
+            }
+            h3{
+                font-size: 3.2rem;
+                color: #fefeff; 
+            }
+            h1{
+                font-size: 5rem;
+                color: #ead700;
+                text-shadow: 0 0.15rem 0.15rem rgba(200, 200, 200, 0.5);
+                text-align: center;
+            }
+            .Logo{
+                width: 480px;
+                height: 160px;
+                float: left;
+                position: relative;
+                margin: 0;
+                bottom: 52px;   
+            }
+            .LogoF{
+                width: 180px;
+                height: 60px;
+                position: relative;
+                margin: 0;
+                bottom: 11px;
+               
+            }
+            .banner button{
+                float: right;
+                margin: 5px;
+                background-color: #08080c;
+                color: #fefeff;
+                text-align: center;
+                border-radius: 10px;
+            }
+            .nav{
+               background-color: #ff0429;
+               margin: 0;
+            }
+            .first{
+               border: none; 
+            }
+            .other{
+                 border: none;
+               border-left: solid 2.5px #ead700;
+            }
+            .nav form{
+               width: 19%;
+              background-color: #ff0429;
+              color: #fefeff;
+              margin: auto;
+              display:inline-flex;
+            }
+            .nav [type=submit]{
+              width: 100%;
+              background-color: #ff0429;
+              color: #fefeff;
+              text-align: center;
+              text-decoration: none;
+              cursor: pointer;
+            }
+           hr{
+                width: 90%;
+                margin: 20px auto;
+                background-color: #ff0429;
+                height: 3px;
+                border: none;
+            }
+            .piller{
+                width: 32%;
+                margin: 3px auto;
+                display: inline-block;
+            }
+            .footer{
+                background-color: #ff0429;
+                height: 230px;
+            }
+            .footer p{
+                margin: 10px;
+            }
+            iframe{
+                width: 800px;
+                height: 450px;
+                margin: auto;
+                display:block;
+            }
+            .leftVid iframe{
+                width: 550px;
+                height: 360px;
+                margin: 0px;
+            }
+            .stack{
+                width: 85%;
+                margin: 5px auto;
+                text-align: center;
+            }
+            @media only screen and (max-width: 1100px) {
+                iframe{
+                width: 700px;
+                height: 394px;
+                }
+                .leftVid iframe{
+                width: 450px;
+                height: 270px;
+                }
+            }
+            @media only screen and (max-width: 900px) {
+            .leftVid iframe{
+            width: 550px;
+            height: 360px;
+            margin: auto;
+            display:block;
+            }
+}
+
+            @media only screen and (max-width: 800px) {
+
+                th{
+                font-size: 2rem;
+                }
+                .footer p{
+                   font-size: 2.5rem;
+                }
+                iframe, .leftVid iframe{
+                width: 550px;
+                height: 309px;
+            }
+
+
+            }
+            @media only screen and (max-width: 650px) {
+                
+                .Logo{
+                    width: 360px;
+                    height: 120px;
+                    bottom: 40px;  
+                }
+            
+                html{
+                    font-size: 40%;
+                }
+                iframe, .leftVid iframe{
+                    width: 400px;
+                    height: 225px;
+                }
+                
+            }
+            @media only screen and (max-width: 500px) {
+                .nav [type=submit]{
+                    font-size: 90%;
+                }
+                html{
+                    font-size:30%;
+                }
+                .Logo{
+                    width: 270px;
+                    height: 90px;
+                    bottom: 30px;  
+                }
+                iframe, .leftVid iframe{
+                    width: 300px;
+                    height: 169px;
+                }
+            }
