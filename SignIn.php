@@ -8,83 +8,19 @@ and open the template in the editor.
     <head>
         <meta charset="UTF-8">
         <title>Sign In</title>
+        <link rel="icon" type="img/png" href="img/DSearchBar.png"/>
         <meta name="robots" content="noindex, nofollow">
-        <link rel="stylesheet" href="css/Login.css"/>
+        <link rel="stylesheet" href="css/Other.css"/>
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         <script type="text/javascript" src="js/login.js"></script>
     </head>
     <body>
-        <style>
-            body{
-                margin: 0;
-                background-image: url("img/Banner.jpg");
-                background-repeat: no-repeat;
-                background-position: 52% 35%;
-            }
+        <!-- Controls the size of the box -->
+        <style>    
             #box{
-               width: 280px;
-               height: 280px;
-               border: 5px black solid;
-               background-color: rgba(255, 255, 255, 0.8);
-               margin: 100px auto;
+               width: 300px;
+               height: 340px;
             }
-            h1{
-                text-align: center;
-                color: black;
-                font-family: sans-serif;
-            }
-            input[type=text], input[type=password]{
-                margin-bottom: 20px;
-                color: black;
-                background-color: rgba(255, 255, 255, 0.7);
-                
-            }
-            input[type=submit]{
-                
-                cursor:pointer;
-                -webkit-border-radius: 5px;
-                border-radius: 5px; 
-                padding: 5px;
-                color:black;
-                background-color: #fefeff;
-               margin: 10px 0 10px 11%;
-            }
-            label{
-                margin-left: 8px;
-                color: black;
-                min-width: 75px;
-                display: inline;
-                float: left;
-                font-size: 15px;
-                font-family: sans-serif 
-            }
-            form #buttonlogin{
-                font-size: 20px;
-                font-family: sans-serif; 
-                display: block;
-                margin: auto;
-                cursor:pointer;
-                -webkit-border-radius: 5px;
-                border-radius: 5px; 
-                padding: 5px;
-                color:black;
-                background-color: #fefeff;
-                
-            }
-            form, #buttonSU{
-                font-size: 10px;
-                font-family: sans-serif;
-                display: inline
-            }form, #buttonFP{
-                font-size: 10px;
-                font-family: sans-serif;
-                display: inline
-            }
-            p{
-                color: #ff0429;
-            }
-            
-            
         </style>
 
         
@@ -97,17 +33,17 @@ and open the template in the editor.
             <label for = "PW">Password</label>
             <Input type = 'password' Name ='PW' id = "PW">
             <p id = "passwordWrong"></p>
-            <input id="buttonlogin" type="button" Name = "Check" value="Login">
+            <input id="buttonlogin" type="button" class = "mainBut" Name = "Check" value="Login"> <!-- Send the data to the sign in process -->
         </form>
             <div id = "username"></div>
         <form action="SignUp.php">
-        <input id="buttonSU" type="submit" Name = "SignUp" value="Create an Account">
+        <input id="buttonSU" class = "otherBut" type="submit" Name = "SignUp" value="Create an Account"><!-- Sends the user to the sign-up page -->
         </form>
         
         <form action="forgottenPass.php">
-        <input id="buttonFP" type="submit" Name = "forgottenPass" value="Forgotten Pass">
-        </form>
-        
+        <input id="buttonFP" class = "otherBut" type="submit" Name = "forgottenPass" value="Forgotten Pass"><!-- Sends the user to the forgotten password page -->
+        </form> 
+        <?php include_once 'backButton.php'; ?>
             </div>
         
            

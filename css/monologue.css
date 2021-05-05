@@ -1,0 +1,56 @@
+.mono img{
+               height: auto;
+                width: 250px;
+               margin: 3px auto;
+            }
+            .mono h3{
+               margin: 3px auto;
+            }
+            .mono{
+                height: 350px;
+            }
+            .gallery{
+                display: inline-grid;
+                grid-template-columns: auto auto auto;
+            }
+            
+            .mono button{
+                color: #fefeff;
+                background: #555555;
+                height: 30px;
+                margin: 10px;
+            }
+              
+    @media only screen and (max-width: 1000px) {
+         .mono{
+            height: 690px;
+            margin: 3px auto;
+            width: 90%;
+        }
+        .gallery{
+            display:block;
+        }
+            .mono img{
+                width: 100%;
+                margin: 3px auto;
+            }
+    }
+     @media only screen and (max-width: 900px) {
+            .mono{
+                height: 650px;
+            }
+    }
+    @media only screen and (max-width: 800px) {
+        
+         .mono{
+            height: 600px;
+        }
+    }
+            @media only screen and (max-width: 650px) {
+              
+            .mono{
+                width: 90%;
+                height: auto;
+                margin: 3px auto;
+            }  
+            }

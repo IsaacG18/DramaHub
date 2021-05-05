@@ -1,6 +1,8 @@
 <html>
     <head>
         <title>Monologues</title>
+        <link rel="icon" type="img/png" href="img/DSearchBar.png"/>
+        <link rel="stylesheet" href="css/monologue.css">
         <link rel="stylesheet" href="css/Main.css">
         <link rel="stylesheet" href="css/sidebar.css">
          <link
@@ -10,17 +12,16 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=PT+Sans&display=swap" rel="stylesheet">
     
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>       
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>      
     <script type="text/javascript" src="js/sidebar.js"></script>
     </head>
     
     
      <?php
-     include_once 'dbconnection.php';
-    $userID = "";
-    $statement = "SELECT * FROM monologue";
+     include_once 'dbconnection.php';//Allow access to the database
+    $statement = "SELECT * FROM monologue";//Create an SQL statement
     $first = true; 
-      
+      //This next get access the values from the submit sidebar and create a statement
      if(isset($_GET['Age'])){
         $age = $_GET['Age'];
         if($first){
@@ -72,10 +73,10 @@
        
     ?>
     <body>
-        <?php include_once 'header.php';?>
+        <?php include_once 'header.php';?><!-- Includes the header for the page -->
        
        
-        <div class = "stack">
+        <div class = "stack"><!-- This is the first block on the page -->
          <h1>Intro To Monologues</h1>
 
               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </p>
@@ -85,12 +86,13 @@
         </div>
         <hr>
         <h1 id = "Title">Monologues</h1>
-        <img src="img/menu.png" id = "sideShow"/>
-          <div class = "column">
+        <img src="img/menu.png" id = "sideShow"/><!-- This is only included if below a minimum -->
+          <div class = "column"><!-- This is the main block containing the list of monologues -->
               
               <div class = "sideBar">
-                  
-               <?php echo"<form action='Monologues.php' method='GET'>
+                  <!-- Adds the sidebar form allowing modifying the sql statement -->
+               <?php
+               echo"<form action='Monologues.php' method='GET'>
                    
 
                     <h3>Search:</h3>
@@ -140,8 +142,8 @@
                    <label for='Cold'>Cold</label><br>
                    <input type='radio' id='Other' name='Type' value='Other'>
                    <label for='Other'> Other</label><br>
-                   <input name= 'UserID' id= 'UserID' type='hidden' value='$userID'>
-                   <input type='submit' id = 'submit' value='Submit'>
+                       
+                   <input id ='subSide' type='submit' value='Submit'>
                 </form>";
              
                ?>   
@@ -151,92 +153,29 @@
         $output = "";
         $output .="<div class = 'gallery'>";
         
-        
-        $query = $con ->prepare("$statement");
-            $success = $query->execute([
-                
-                    ]);
-            $monos = $query->fetchall(PDO::FETCH_OBJ);
-            $count = 0;
-        foreach ($monos as $mono){
-            $count++;
-             $output .="<div class = 'mono'> <img src ='$mono->img'/> <br> <h3>$mono->play</h3> <h3>$mono->part</h3> <h3>$mono->title</h3>"
-                     . "<form action='monoPage.php' method='GET'>
-                <input name= 'UserID' type='hidden' value='$userID'>
-                <input name= 'MonoID' type='hidden' value='$mono->monoID'>
-                <button class = 'mono' type='submit'>Have a Look</button>
-                </form></div>";
+        try{
+            $query = $con ->prepare("$statement");//Runs the created SQL statement
+                $success = $query->execute([
+
+                        ]);
+                $monos = $query->fetchall(PDO::FETCH_OBJ);
+
+            foreach ($monos as $mono){//Runs each monologue in the database that meet the requirement
+                 $output .="<div class = 'mono'> <img src ='$mono->img'/> <br> <h3>$mono->play</h3> <h3>$mono->part</h3> <h3>$mono->title</h3>"//Formate the data then adds it to output
+                         . "<form action='monoPage.php' method='GET'>
+                    <input name= 'UserID' type='hidden' value='$userID'>
+                    <input name= 'MonoID' type='hidden' value='$mono->monoID'>
+                    <button class = 'mono' type='submit'>Have a Look</button>
+                    </form></div>";
+            }
+            $output .= "</div>";
+            echo $output;//Prints output
+        }catch(PDOException $e){
+            echo $sql . "<br>" . $e->getMessage();
         }
-       
-       
-            
-        
-        $output .= "</div>";
-        
-            echo $output;
-        
         ?>
           
          </div>
-         <?php include_once 'footer.php';?>
-        <style>
-
-            .mono img{
-               height: auto;
-                width: 250px;
-               margin: 3px auto;
-            }
-            .mono h3{
-               margin: 3px auto;
-            }
-            .mono{
-                height: 350px;
-            }
-            .gallery{
-                display: inline-grid;
-                grid-template-columns: auto auto auto;
-            }
-            
-            .mono button{
-                color: #fefeff;
-                background: #555555;
-                height: 30px;
-                margin: 10px;
-            }
-              
-    @media only screen and (max-width: 1000px) {
-         .mono{
-            height: 690px;
-            margin: 3px auto;
-            width: 90%;
-        }
-        .gallery{
-            display:block;
-        }
-            .mono img{
-                width: 100%;
-                margin: 3px auto;
-            }
-    }
-     @media only screen and (max-width: 900px) {
-            .mono{
-                height: 650px;
-            }
-    }
-    @media only screen and (max-width: 800px) {
-        
-         .mono{
-            height: 600px;
-        }
-    }
-            @media only screen and (max-width: 650px) {
-              
-            .mono{
-                width: 90%;
-                height: auto;
-                margin: 3px auto;
-            }  
-            }
-        </style>
+         <?php include_once 'footer.php';?><!-- Includes the footer in this page -->
     </body>
 </html>

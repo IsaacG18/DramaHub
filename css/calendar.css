@@ -32,12 +32,15 @@
 }
 
 .month a {
-  font-size: 3rem;
+  font-size: 3rem; 
   font-weight: 400;
   text-transform: uppercase;
   letter-spacing: 0.2rem;
   margin-bottom: 1rem;
   color: #ead700;
+}
+.month h5 a{
+   font-size: 1rem; 
 }
 
 .month p {
@@ -69,6 +72,9 @@
   flex-wrap: wrap;
   padding: 0.2rem;
 }
+span a{
+    font-size: 0.8rem;
+    }
 
 .days div {
   font-size: 1.4rem;
@@ -93,8 +99,20 @@
   opacity: 0.5;
 }
 
+.days a{
+    color: #fefeff;
+}
 .today {
   background-color: #ff0429;
+}
+.other {
+  background-color: #7c7c7c;
+}
+.deadline {
+  background-color: #ead700;
+}
+.open {
+  background-color: #262626;
 }
 @media only screen and (max-width: 800px) {
 .container{

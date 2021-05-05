@@ -7,6 +7,7 @@ $outputC = '<div class="container">
           <i class="fas fa-angle-left prev"></i>
           <div class="date">
               <h1><a href="datesdisplay.php"></a></h1>
+              <h5><a href="datesdisplay.php">Click here for dates</a></h5>
             <p></p>
           </div>
           <i class="fas fa-angle-right next"></i>
@@ -21,11 +22,12 @@ $outputC = '<div class="container">
           <div>Sat</div>
         </div>
         <div class="days"></div>
-      </div>    
-    </div>
+        </div>    
+    </div>     
+   
             
            
             
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>       
     <script src="js/calendar.js"></script>';
-echo $outputC;
+echo $outputC;//Prints to output

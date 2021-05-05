@@ -1,25 +1,29 @@
 <html>
     <head>
         <title>Shows</title>
+        <link rel="icon" type="img/png" href="img/DSearchBar.png"/>
+        <link rel="stylesheet" href="css/Show.css">
         <link rel="stylesheet" href="css/Main.css">
         <link rel="stylesheet" href="css/sidebar.css">
-         <link
+        <link
       href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=PT+Sans&display=swap" rel="stylesheet">
-    
+    <script type="text/javascript" src="js/Show.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>       
     <script type="text/javascript" src="js/sidebar.js"></script>
+    
     </head>
+
     
     <?php
-    include_once 'dbconnection.php';
+    include_once 'dbconnection.php'; // include database access ablitiy
     $userID = "";
     $statement = "SELECT * FROM shows";
     $first = true; 
-      
+      //Gets the values from sidebar submits if used then if true adds to the statement
       if(isset($_GET['Age']) and $_GET['Age'] !== "AnyAge" ){
         $age = $_GET['Age'];
        if($first){
@@ -73,32 +77,32 @@
      }
     ?>
     <body>
-        <?php include_once 'header.php';?>
-<div class="slideshow-container">
+        <?php include_once 'header.php';?> <!-- Includes the header for the page -->
+    <div class="slideshow-container"> <!-- This contains the 3 slides which rotate automatically every 3 seconds -->
 
-<div class="mySlides fade">
-    <div class="S1">
-  <div class="numbertext">1 / 3</div>
-  
-  <div class="text">Othello</div>
-  </div>
-</div>
+    <div class="mySlides fade"><!-- First Image in slideshow -->
+        <div class="S1">
+            <div class="numbertext">1 / 3</div>
+            <div class="text">Othello</div>
+        </div>
+    </div>
 
-<div class="mySlides fade">
-  <div class="S2">
-    <div class="numbertext">2 / 3</div>
-    <div class="text">Merchant Of Venice's</div>
-  </div>
-</div>
+    <div class="mySlides fade"><!-- Second Image in slideshow -->
+      <div class="S2">
+        <div class="numbertext">2 / 3</div>
+        <div class="text">Merchant Of Venice's</div>
+      </div>
+    </div>
 
-<div class="mySlides fade">
- <div class="S3">
-  <div class="numbertext">3 / 3</div>
-  <div class="text">Cat on a Hot Tin Roof</div>
- </div>
-</div>
+    <div class="mySlides fade"><!-- Third Image in slideshow -->
+     <div class="S3">
+      <div class="numbertext">3 / 3</div>
+      <div class="text">Cat on a Hot Tin Roof</div>
+     </div>
+    </div>
 
 </div>
+        
 
 <br>
 
@@ -107,33 +111,15 @@
   <span class="dot"></span> 
   <span class="dot"></span> 
 </div>
-<script>
-var slideIndex = 0;
-showSlides();
+    <script type="text/javascript" src="js/Show.js"></script><!-- This adds the script for the slideshow -->
 
-function showSlides() {
-  var i;
-  var slides = document.getElementsByClassName("mySlides");
-  var dots = document.getElementsByClassName("dot");
-  for (i = 0; i < slides.length; i++) {
-    slides[i].style.display = "none";  
-  }
-  slideIndex++;
-  if (slideIndex > slides.length) {slideIndex = 1}    
-  for (i = 0; i < dots.length; i++) {
-    dots[i].className = dots[i].className.replace(" active", "");
-  }
-  slides[slideIndex-1].style.display = "block";  
-  dots[slideIndex-1].className += " active";
-  setTimeout(showSlides, 2000); // Change image every 2 seconds
-}
-</script>
         <h1 id = "Title">Shows</h1>
-                      <img src="img/menu.png" id = "sideShow"/>
+        <img src="img/menu.png" id = "sideShow"/> <!-- Only appears when reaching a certain screen size -->
           <div class = "column">
  
          <div class = "sideBar">
-             <?php echo'  <form action="shows.php" method="GET">
+             <?php // This form allows users to narrow down there search for items 
+             echo'  <form action="shows.php" method="GET">
                     <h3>Search:</h3>
                     <input type="text" id="SearchB" name="SearchB">
                     
@@ -193,18 +179,18 @@ function showSlides() {
      
               $output = "";
         
-        
-        $query = $con ->prepare("$statement");
+        try{
+        $query = $con ->prepare("$statement");//This uses the statement created at the top of the page to get all the monologue that meet the requirements
             $success = $query->execute([
                 
                     ]);
             $shows = $query->fetchall(PDO::FETCH_OBJ);
             
-        foreach ($shows as $show){
+        foreach ($shows as $show){//Loops through all the items found
 
              
              
-              $output .= '<div class ="show">';
+              $output .= '<div class ="show">'; //Formates the data and adds it to output
               $output .= "<div class = 'playImg'>$show->img</div>";
               $output .= "<div class = 'playText'>"
                       . "<h3>$show->play</h3>"
@@ -219,121 +205,14 @@ function showSlides() {
             
         
         $output .= "</div>";
-             echo $output;
-             
+             echo $output;//Prints out output
+        }catch(PDOException $e){
+            echo $sql . "<br>" . $e->getMessage();
+        }      
               ?>
                 </div>   
         </div>      
         
-         <?php include_once 'footer.php';?>
-        <style>
-            .playImg img{
-                width: 100%;
-                height: auto;
-            }
-            .playImg{
-                width: 100%;
-               
-            }
-            .gallery{
-                display: block;
-            }
-            .show{
-                display: inline-flex;
-                margin: 10px;
-            }
-            
-            .playText{
-                width:60%;
-                margin-left: 10px;
-            } 
-    .S1{
-        width: 100%;
-        height: 250px;
-        background-image: url("img/Drama1.jpg");
-        background-repeat: no-repeat; 
-        background-size: cover;
-        background-position: bottom;
-    }
-    .S2{
-        width: 100%;
-        height: 250px;
-        background-image: url("img/Drama2.jpg");
-        background-repeat: no-repeat; 
-        background-size: cover;
-        background-position: bottom;
-    }
-    .S3{
-        width: 100%;
-        height: 250px;
-        background-image: url("img/Drama3.jpg");
-        background-repeat: no-repeat; 
-        background-size: cover;
-        background-position: bottom;
-    }
-    .slideshow-container {
-  max-width: 1200px;
-  position: relative;
-  margin: auto;
-}
-
-/* Caption text */
-.text {
-  color: #f2f2f2;
-  font-size: 15px;
-  padding: 8px 12px;
-  position: absolute;
-  bottom: 8px;
-  width: 100%;
-  text-align: center;
-}
-
-/* Number text (1/3 etc) */
-.numbertext {
-  color: #f2f2f2;
-  font-size: 12px;
-  padding: 8px 12px;
-  position: absolute;
-  top: 0;
-}
-
-/* The dots/bullets/indicators */
-.dot {
-  height: 15px;
-  width: 15px;
-  margin: 0 2px;
-  background-color: #bbb;
-  border-radius: 50%;
-  display: inline-block;
-  transition: background-color 0.6s ease;
-}
-
-.active {
-  background-color: #717171;
-}
-
-/* Fading animation */
-.fade {
-  -webkit-animation-name: fade;
-  -webkit-animation-duration: 1.5s;
-  animation-name: fade;
-  animation-duration: 1.5s;
-}
-
-@-webkit-keyframes fade {
-  from {opacity: .4} 
-  to {opacity: 1}
-}
-
-@keyframes fade {
-  from {opacity: .4} 
-  to {opacity: 1}
-}
-
-/* On smaller screens, decrease text size */
-@media only screen and (max-width: 300px) {
-  .text {font-size: 11px}
-}
-        </style>
+         <?php include_once 'footer.php';?> <!-- Includes the footer in this page -->
     </body>
 </html>

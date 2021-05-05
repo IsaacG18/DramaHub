@@ -1,30 +1,30 @@
 const date = new Date();
 
 function daysInMonth (month, year) {
-    return new Date(year, month, 0).getDate();
+    return new Date(year, month, 0).getDate();//Gets each day in a month
 }
 
 const fillCalendar = (firstDayIndex, prevLastDay, nextDays, monthDays) => { 
-    var year = date.getFullYear();
-    var month = date.getMonth() + 1;
-    var days = daysInMonth(month, year);
+    var year = date.getFullYear();//Get the dates year
+    var month = date.getMonth() + 1;//Get the dates month
+    var days = daysInMonth(month, year);//Get every day in a month
    
-            $.post("FindDate.php", {year: year, month:  month, days: days},
-                     function (data) {  
-                        if (data.includes('</div>')) {
+            $.post("FindDate.php", {year: year, month:  month, days: days},//run file get FindDate.php
+                     function (data) {  //The data echo response from the php file
+                        if (data.includes('</div>')) {//If php echo response includes </div>
                             let days = "";
                             for (let x =firstDayIndex; x > 0; x--) {
-                            days += `<div class="prev-date">${prevLastDay - x + 1}</div>`;
+                            days += `<div class="prev-date">${prevLastDay - x + 1}</div>`;//Add days in the week before month
   }
                             days += data;
                             
                             for (let j = 1; j <= nextDays; j++) {
-                            days += `<div class="next-date">${j}</div>`;
-                            monthDays.innerHTML = days;
+                            days += `<div class="next-date">${j}</div>`;//Add days in the week after month
+                            monthDays.innerHTML = days;//Set days to calender
                             
                             }        
                         } else {
-                            alert(data);
+                            alert('Check with system admin, report this message'+ data);//Alerts send and deals with an error from the php file 
                         }
                     });
                     
@@ -75,9 +75,9 @@ const renderCalendar = () => {
   ];
   
 
-  document.querySelector(".date a").innerHTML = months[date.getMonth()] + "<br>" + date.getFullYear();
+  document.querySelector(".date a").innerHTML = months[date.getMonth()] + "<br>" + date.getFullYear();//Set month and year to be displayed
 
-  document.querySelector(".date p").innerHTML = new Date().toDateString();
+  document.querySelector(".date p").innerHTML = new Date().toDateString();//Set current date to appear at the top of the page
     
 
 
@@ -87,14 +87,14 @@ const renderCalendar = () => {
   };
 
 document.querySelector(".prev").addEventListener("click", () => {
-  date.setMonth(date.getMonth() - 1);
+  date.setMonth(date.getMonth() - 1);//Moves the month backwards
   
-  renderCalendar();
+  renderCalendar();//Re-runs calendar now with new month
 });
 
 document.querySelector(".next").addEventListener("click", () => {
-  date.setMonth(date.getMonth() + 1);
-  renderCalendar();
+  date.setMonth(date.getMonth() + 1);//Moves the month forward
+  renderCalendar();//Re-runs calendar now with new month
 });
 
 renderCalendar();

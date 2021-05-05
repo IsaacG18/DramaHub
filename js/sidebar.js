@@ -2,9 +2,9 @@ var show = false;
 
 $(document).ready(function () {
      
-    $("#sideShow").click(function () {
+    $("#sideShow").click(function () {//Waits until sideShow has been clicked
       
-    if(show === false){                        
+    if(show === false){//Check if showing sidebar already                         
         $('.sideBar').css("width", "100%");
         $('.sideBar').css("visibility", "visible");
         $('.sideBar form').css("visibility", "visible");
@@ -31,8 +31,7 @@ $(document).ready(function () {
 
 });
  function changeSize(x) {
-  if (x.matches) {
-      console.log("Change");
+  if (x.matches) {//Set if greater
       $('.gallery').css("width", "90%");
       $('.show').css("display", "inline-flex");
       $('.sideBar').css("width", "0");
@@ -43,8 +42,7 @@ $(document).ready(function () {
       $('.show').css("margin", "10px");
       show = false;
     
-  } else {
-      console.log("Change");
+  } else {//Set if less than
       $('.gallery').css("width", "79%");
       $('.show').css("display", "inline-flex");
       $('.sideBar').css("width", "20%");
@@ -55,9 +53,8 @@ $(document).ready(function () {
       $('.show').css("margin", "10px");
   }
 }
-const smallDevice = window.matchMedia("(max-width: 650px)");    
+const smallDevice = window.matchMedia("(max-width: 650px)");//Set when the event tricker will happen    
 changeSize(smallDevice);
-smallDevice.addListener(changeSize);
-
+smallDevice.addListener(changeSize);//Create an event listener
 
 });

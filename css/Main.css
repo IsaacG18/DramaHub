@@ -16,8 +16,11 @@
                 max-width: 1200px;
                 min-width: 350px;
                 margin: auto;
-                background-color: #08080c;
-                border: solid 4px #ff0429;
+                
+            }
+            #background{
+               background-color: #08080c;               
+               border: solid 4px #ff0429;
             }
             .banner{
                 width: 100%;
@@ -126,6 +129,39 @@
                 width: 85%;
                 margin: 5px auto;
                 text-align: center;
+            }
+            input[type=button], input[type=submit], .upload{
+                color: #fefeff;
+                background-color: #ff0429;
+                border:#ead700 2px solid;
+                border-radius: 15px;
+                padding: 5px;
+                font-size: 2rem;
+                cursor: pointer;
+            }
+            textarea{
+                width: 100%;
+                color: #ead700;
+                border: solid 2px #ead700;
+                background-color: #ff0429;
+                font-size: 2rem;
+                margin: 15px 0;
+            }
+            #wrong{
+                color: #ff0429;
+            }
+            .nameNMessage{
+                width: 70%;
+            }
+            .comment{
+                margin: 5px auto;
+                width: 95%;
+            }
+            .miss{
+                display: flex;
+            }
+            .date{
+                float: right;
             }
             @media only screen and (max-width: 1100px) {
                 iframe{

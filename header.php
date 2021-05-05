@@ -1,36 +1,34 @@
 <?php
     $userID = ""; 
-    if(isset($_COOKIE["user"]) && $_COOKIE["user"] != ''  && $_COOKIE['user'] == true){
+    if(isset($_COOKIE["user"]) && $_COOKIE["user"] != ''  && $_COOKIE['user'] == true){ // This checks then gets the cookie for the userID
          $userID = $_COOKIE["user"];
      }else{
-         $userID = 1;
+         $userID = 1; // This sets a default guest number if the user is not login
      }
     $outputB = "";
                
 
     
-        $outputB .= "<div class = 'banner'>";
+        $outputB .= "<div id = 'background'><div class = 'banner'>";
         $outputB .= '<img class = "Logo" src="img/Logo5.png"/>';
             
-            if($userID == 1){
-                $output .="
+            if($userID == 1){//Effect the output depending on if the user is login or not
+                $outputB .="
                 <form action='SignIn.php' method='POST'>
-                <input name= 'page' type='hidden' value='index'>
+    
                 <button class = 'SignIn' type='submit'>Sign In</button>
                 </form>
                 <form action='SignUp.php' method='POST'>
-                <input name= 'page' type='hidden' value='index'>
+
                 <button class = 'SignUp' type='submit'>Sign Up</button>
-                </form>";
+                </form></div>";//Allows Guest to login, or  sign up
             }else{
                 $outputB .="<form action='SignOut.php' method='POST'>
-                <button class = 'SignOut' type='submit'>Sign Out</button>
-                </form>
-                <form action='Delete.php' method='POST'>
-                <input name= 'UserID' type='hidden' value='$userID'>
-                <input name= 'page' type='hidden' value='index'>
-                <button class = 'Delete' type='submit'>Delete</button>
-                </form></div>";
+                                <button class = 'SignOut' type='submit'>Sign Out</button>
+                            </form>
+                            <form action='Delete.php' method='POST'>
+                                <button class = 'Delete' type='submit'>Delete</button>
+                            </form></div>";//Allows users to delete there accout or sign out
             }
            
             
@@ -49,6 +47,7 @@
              </form>
              <form action='getInspired.php' method='GET'>
                 <button class = 'other' type='submit'>Get Inspired</button>
-             </form></div>";
-            echo $outputB ?>
+             </form></div>";//This is the navbar for the page
+            echo $outputB;//Prints output
+            ?>
             

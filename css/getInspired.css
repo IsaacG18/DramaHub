@@ -1,0 +1,101 @@
+.blocks{
+                width: 90%;
+                margin: 10px 0 10px 5%;
+                display: inline-grid;
+                grid-template-columns: auto auto auto;
+            }
+            .art img{
+               height: 70%;
+               display: block;
+               width: 90%;
+               margin: 3px auto;
+            }
+            .art h3{
+               margin: 3px auto;
+            }
+            .art{
+                height: 325px;
+            }
+            .loadmore form{
+                text-align: center;  
+                margin: 10px;
+            }
+            .art input[type=submit]{
+                margin: 5px 0;
+            }
+            .search{
+                float: left;
+                margin: 10px 2px;
+                
+            }
+            
+            .upload{
+               float: left; 
+               margin: 10px;
+            }
+            
+           @media only screen and (max-width: 900px) {
+        .blocks{
+            display: block;
+        }
+        .art{
+            height: 550px;
+            width: 80%;
+            margin: 10px auto;
+        }
+        .blocks h3{
+            margin: 20px;
+        }
+        .art img{
+               height: 400px;
+               width: 500px;
+               
+            }
+           
+           }
+        @media only screen and (max-width: 650px) {
+            .art{
+            height: 480px;
+            width: 80%;
+            margin: 10px auto;
+        }
+        .art img{
+               height: 360px;
+               width: 450px;    
+            }
+            
+        }
+        @media only screen and (max-width: 550px) {
+            .art{
+            height: 450px;
+            width: 80%;
+            margin: 10px auto;
+        }
+        .art img{
+               height: 280px;
+               width: 350px;    
+            }
+            
+        }    
+    @media only screen and (max-width: 550px) {
+            .art{
+            height: 400px;
+            width: 80%;
+            margin: 10px auto;
+        }
+        .art img{
+               height: 280px;
+               width: 300px;    
+            }
+        }
+    @media only screen and (max-width: 500px) {
+            .art{
+            height: 350px;
+            width: 80%;
+            margin: 10px auto;
+        }
+        .art img{
+               height: 200px;
+               width: 250px;    
+            }
+    }

@@ -1,38 +1,41 @@
 <?php
- include_once 'dbconnection.php';
+ include_once 'dbconnection.php';//Access the database
         $Bcount = $_POST['banners'];
         $output= "success~";
- $query = $con ->prepare("SELECT count(*)as num FROM advert");
+ $query = $con ->prepare("SELECT count(*)as num FROM advert");//Checks if there is enough adverts
             $num = $query->execute([]);
              $count = $query->fetch(PDO::FETCH_OBJ);
              $amount = $count->num;
              $arr = [0,0,0,0,0];
              if($amount < $Bcount){
-                 echo("Error Not enough posters");
+                 echo("Error Not enough posters");//Sends that there is an issue if it does not work
              }
-             for($i = 1; $i<= $Bcount; $i++){
-                 
+            for($i = 1; $i<= $Bcount; $i++){
                  $check = false;
-                 while($check == false){
+                 while($check == false){//Make sure the number is unqiue
                      $check = true;
-                     $search = rand(1, $amount);
-                     for($j = 1; $j<= $Bcount; $j++){
+                     $search = rand(1, $amount);//Creates a random value 
+                     for($j = 1; $j<= $Bcount; $j++){//Checks that number does not already exist
                         if($search == $arr[$j]){
                          $check = false;
                         } 
                      }
                  }
-                 $arr[$i] = $search;
-                $query = $con ->prepare("SELECT * FROM advert WHERE adID =:adID"); 
-                $success = $query->execute([
-                ':adID' => $search
-                    ]);
-            $banner= $query->fetch(PDO::FETCH_OBJ);
-            if($success){
-             $output .= "url($banner->image) ` .split$i ~";  
+                $arr[$i] = $search;//Adds value
+                try{
+                    $query = $con ->prepare("SELECT * FROM advert WHERE adID =:adID"); //Gets the advert based on the value
+                    $success = $query->execute([
+                    ':adID' => $search
+                        ]);
+                    $banner= $query->fetch(PDO::FETCH_OBJ);
+                    if($success){
+                        $output .= "url(../$banner->image) ` .split$i ~"; //Addes the image to the database 
+                    }
+                }catch(PDOException $e){
+                    echo $sql . "<br>" . $e->getMessage();
+                }
             }
-             }
-             echo $output;
+             echo $output;//Send the databack
              
 
             

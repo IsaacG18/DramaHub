@@ -1,4 +1,4 @@
-<?php
+<?php //Adds the data from the footer to output
  $outputF = '<div class = "footer">
              <div class = "piller">
                  <p>Partnerships</p>
@@ -18,6 +18,6 @@
                  <p>@DramaHub</p>
              </div>
              <img class = "LogoF" src="img/Logo5.png"/>
-         </div>';
- echo $outputF;
+         </div></div>';
+ echo $outputF;//Print the output
 
