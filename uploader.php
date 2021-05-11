@@ -10,7 +10,7 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <title>Uploader</title>
                 <meta name="robots" content="noindex, nofollow">
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         <script type="text/javascript" src="js/upload.js"></script>
         <link rel="stylesheet" href="css/Other.css"/>
     </head>
@@ -25,7 +25,7 @@ and open the template in the editor.
         <style>
             #box{
                width: 300px;
-               height: 550px;
+               height: 575px;
             }
         </style>
 
@@ -33,7 +33,7 @@ and open the template in the editor.
             <h1>Uploader</h1>
         <?php
         if($userID != 1){// Check is the users is login
-        echo "<form method='POST' action='GetUploader.php' id = 'content' enctype='multipart/form-data'>
+        echo "<form method='POST' id = 'content' enctype='multipart/form-data'>
             <label for = 'title'>Title</label>
             <Input type = 'text' Name ='title' id = 'title'>
             <br><br>
