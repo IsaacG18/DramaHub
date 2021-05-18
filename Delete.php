@@ -9,8 +9,8 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <title>Delete Account</title>
         <meta name="robots" content="noindex, nofollow">
-        <link rel="stylesheet" href="css/Login.css"/>
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <link rel="icon" type="img/png" href="img/DSearchBar.png"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         <script type="text/javascript" src="js/Delete.js"></script>
         <link rel="stylesheet" href="css/Other.css"/>
     </head>

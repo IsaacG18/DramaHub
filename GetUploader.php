@@ -30,7 +30,7 @@ $fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
             $statusMsg = "Sorry, there was an error uploading your file.";//Sends are failer
         }
     }else{
-        $statusMsg = 'Sorry, files type failed.';//Sends are failer
+        $statusMsg = "Sorry, files type failed.";//Sends are failer
     }
 
 

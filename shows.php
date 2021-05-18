@@ -12,7 +12,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=PT+Sans&display=swap" rel="stylesheet">
     <script type="text/javascript" src="js/Show.js"></script>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>       
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>       
     <script type="text/javascript" src="js/sidebar.js"></script>
     
     </head>
@@ -21,7 +21,7 @@
     <?php
     include_once 'dbconnection.php'; // include database access ablitiy
     $userID = "";
-    $statement = "SELECT * FROM shows";
+    $statement = "SELECT * FROM shows inner join image on shows.imgID = image.imgID";
     $first = true; 
       //Gets the values from sidebar submits if used then if true adds to the statement
       if(isset($_GET['Age']) and $_GET['Age'] !== "AnyAge" ){
@@ -190,8 +190,8 @@
 
              
              
-              $output .= '<div class ="show">'; //Formates the data and adds it to output
-              $output .= "<div class = 'playImg'>$show->img</div>";
+              $output .= "<div class ='show' onclick='location.href=`$show->link`;' style='cursor: pointer;'>"; //Formates the data and adds it to output
+              $output .= "<div class = 'playImg'><img src ='$show->imgFile' alt='$show->alt'/></div>";
               $output .= "<div class = 'playText'>"
                       . "<h3>$show->play</h3>"
                       . "<h5>$show->author<h5>"

@@ -18,8 +18,9 @@
                     foreach($dates as $date){//Loops throug each important date
                         $date1 = (string)date("d", strtotime($date->date));//Formates date
                         $date2 = (string)$i;//Formates day
+                        
                         if($i< 10){
-                            $date1 = "0{$i}";
+                            $date2 = "0{$i}";
                         }
                         if($date1 === $date2){//Compare day and date
                             $type=$date->type ;//Get type

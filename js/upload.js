@@ -50,7 +50,7 @@ $(document).ready(function () {
         }
         });
         $.ajax({
-              url: '../GetUploader.php',//Sends to GetUploader.php
+              url: 'GetUploader.php',//Sends to GetUploader.php
               type: 'POST',//Send as a post
               data:formData,//formData is what is being sent
                  
@@ -83,7 +83,7 @@ $(document).ready(function () {
                     window.location.href =  "artWork.php?artID=" + data[0];//Send you to the created page
                  }
                  else {
-                    alert('Check with system admin, report this message '+ response);//Send response back if there is an error as an alert
+                    alert('Check with system admin (Admin@email.com), report this message '+ response);//Send response back if there is an error as an alert
                  }
                 }
            });

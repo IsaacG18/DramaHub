@@ -1,5 +1,6 @@
 <html>
     <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>        
         <title>Drama School</title>
         <link rel="icon" type="img/png" href="img/DSearchBar.png"/>
         <link rel="stylesheet" href="css/dramaSchool.css">
@@ -15,7 +16,7 @@
     />
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=PT+Sans&display=swap" rel="stylesheet">
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
         <script src="js/DramaSchool.js"></script>
     </head>
     

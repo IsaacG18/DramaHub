@@ -13,6 +13,7 @@
       href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>  
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=PT+Sans&display=swap" rel="stylesheet">
     </head>
@@ -40,7 +41,7 @@
             <!-- Include the calendar -->
           
     <div class = "show">
-              <img src="img/homeAdd.jpg"  alt="alt"/>
+              <img src="img/homeAdd.jpg"  alt="Lorem ipsum dolor"/>
               
               <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
                   Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. </p>
@@ -58,7 +59,7 @@
               <div class="flip-box">
               <div class="flip-box-inner">
                 <div class="flip-box-front">
-                 <img src="img/homeAdd.jpg" width ="100%" height="auto" alt="alt"/>
+                 <img src="img/homeAdd.jpg" width ="100%" height="auto" alt="Lorem ipsum dolor"/>
                 </div>
                 <div class="flip-box-back">
                   <h3>Dave's Art</h3>
@@ -71,7 +72,7 @@
               <div class="flip-box">
               <div class="flip-box-inner">
                 <div class="flip-box-front">
-                 <img src="img/homeAdd.jpg" width ="100%" height="auto" alt="alt"/>
+                 <img src="img/homeAdd.jpg" width ="100%" height="auto" alt="Lorem ipsum dolor"/>
                 </div>
                 <div class="flip-box-back">
                   <h3>Kyle's Art</h3>
@@ -85,7 +86,7 @@
               <div class="flip-box">
               <div class="flip-box-inner">
                 <div class="flip-box-front">
-                 <img src="img/homeAdd.jpg" width ="100%" height="auto" alt="alt"/>
+                 <img src="img/homeAdd.jpg" width ="100%" height="auto" alt="Lorem ipsum dolor"/>
                 </div>
                 <div class="flip-box-back">
                   <h3>Mary's Art</h3>

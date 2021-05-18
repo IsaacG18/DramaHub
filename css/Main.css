@@ -26,7 +26,7 @@
                 width: 100%;
                 height: 550px;
                 margin: 0px auto;
-                background-image: url("../img/Banner.jpg");
+                background-image: url("../img/BannerL.jpg");
                 background-repeat: no-repeat; 
                 background-size: cover;
                 background-position: bottom;
@@ -68,6 +68,7 @@
                 color: #fefeff;
                 text-align: center;
                 border-radius: 10px;
+                min-width: 60px;
             }
             .nav{
                background-color: #ff0429;
@@ -180,6 +181,9 @@
             margin: auto;
             display:block;
             }
+            .banner{
+                background-image: url("../img/Banner.jpg");
+            }    
 }
 
             @media only screen and (max-width: 800px) {
@@ -198,6 +202,9 @@
 
             }
             @media only screen and (max-width: 650px) {
+                .banner{
+                background-image: url("../img/BannerS.jpg");
+                }   
                 
                 .Logo{
                     width: 360px;

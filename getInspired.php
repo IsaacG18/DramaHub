@@ -36,7 +36,7 @@
     <body>
         <?php include_once 'header.php';?> <!-- Includes the header for the page -->
          <?php if($userID != 1){//This checks if the user is login and displays it t
-            echo"<form action='Uploader.php' method='POST'>
+            echo"<form action='uploader.php' method='POST'>
                     <button class = 'upload' type='submit'>Upload</button>
                 </form>";//This sends users to be allowed to upload work
             }else{
@@ -62,8 +62,9 @@
             <br>
             <br>
                <?php
+               if(isset($_GET['Search'])){//Checks if it is not empty
                     $search = trim($_GET['Search']);//This gets the search value and trims the black spaces ever side
-                    if(!empty($search)){//Checks if it is not empty
+                    if(!empty($search)){
                       $output = "";
                    $output .="<h1>Search Results</h1>";   
         $output .="<div class = 'blocks'>";
@@ -95,9 +96,11 @@
      
         $output .= "</div>";
             
-        
+                    
             echo $output; //Prints the output
                     }
+               }
+               
               ?>
         
         

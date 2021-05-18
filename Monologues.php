@@ -12,14 +12,14 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=PT+Sans&display=swap" rel="stylesheet">
     
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>      
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>      
     <script type="text/javascript" src="js/sidebar.js"></script>
     </head>
     
     
      <?php
      include_once 'dbconnection.php';//Allow access to the database
-    $statement = "SELECT * FROM monologue";//Create an SQL statement
+    $statement = "SELECT * FROM monologue inner join image on monologue.imgID = image.imgID";//Create an SQL statement
     $first = true; 
       //This next get access the values from the submit sidebar and create a statement
      if(isset($_GET['Age'])){
@@ -161,12 +161,8 @@
                 $monos = $query->fetchall(PDO::FETCH_OBJ);
 
             foreach ($monos as $mono){//Runs each monologue in the database that meet the requirement
-                 $output .="<div class = 'mono'> <img src ='$mono->img'/> <br> <h3>$mono->play</h3> <h3>$mono->part</h3> <h3>$mono->title</h3>"//Formate the data then adds it to output
-                         . "<form action='monoPage.php' method='GET'>
-                    <input name= 'UserID' type='hidden' value='$userID'>
-                    <input name= 'MonoID' type='hidden' value='$mono->monoID'>
-                    <button class = 'mono' type='submit'>Have a Look</button>
-                    </form></div>";
+                 $output .="<div class = 'mono' onclick='location.href=`monoPage.php?MonoID=$mono->monoID`;' style='cursor: pointer;'> <img src ='$mono->imgFile' alt='$mono->alt'/> <br> <h3>$mono->play</h3> <h3>$mono->part</h3> <h3>$mono->title</h3>"//Formate the data then adds it to output
+                         . "</div>";
             }
             $output .= "</div>";
             echo $output;//Prints output

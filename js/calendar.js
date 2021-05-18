@@ -8,7 +8,7 @@ const fillCalendar = (firstDayIndex, prevLastDay, nextDays, monthDays) => {
     var year = date.getFullYear();//Get the dates year
     var month = date.getMonth() + 1;//Get the dates month
     var days = daysInMonth(month, year);//Get every day in a month
-   
+            
             $.post("FindDate.php", {year: year, month:  month, days: days},//run file get FindDate.php
                      function (data) {  //The data echo response from the php file
                         if (data.includes('</div>')) {//If php echo response includes </div>
@@ -17,6 +17,7 @@ const fillCalendar = (firstDayIndex, prevLastDay, nextDays, monthDays) => {
                             days += `<div class="prev-date">${prevLastDay - x + 1}</div>`;//Add days in the week before month
   }
                             days += data;
+                           
                             
                             for (let j = 1; j <= nextDays; j++) {
                             days += `<div class="next-date">${j}</div>`;//Add days in the week after month

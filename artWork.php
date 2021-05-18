@@ -3,7 +3,7 @@
         <title>Art Work</title>
         <link rel="icon" type="img/png" href="img/DSearchBar.png"/>
         <link rel="stylesheet" href="css/Main.css">
-        <link rel="stylesheet" href="css/smallPage.css">
+     
          
        <link
       rel="stylesheet"

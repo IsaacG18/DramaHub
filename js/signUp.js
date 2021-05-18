@@ -30,7 +30,7 @@ $(document).ready(function () {
                         } else if (data.includes('free')) {//If php echo response contains free
                             window.location.href = "SignIn.php";//Redirents to the sign in page
                         } else {
-                            alert('Check with system admin, report this message '+ data);//Send response back if there is an error as an alert
+                            alert('Check with system admin (Admin@email.com), report this message '+ data);//Send response back if there is an error as an alert
                         }
                     });
         }

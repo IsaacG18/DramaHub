@@ -44,7 +44,7 @@ $(document).ready(function () {
                             createCookie("user", num[0], "7"); 
                             window.location.href = document.cookie;//Sends user with cookie
                         } else {
-                            alert('Check with system admin, report this message '+ data);//Send response back if there is an error as an alert
+                            alert('Check with system admin (Admin@email.com), report this message '+ data);//Send response back if there is an error as an alert
                         }
                     });
         }

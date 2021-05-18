@@ -3,11 +3,12 @@
         <title>Monologue</title>
         <link rel="icon" type="img/png" href="img/DSearchBar.png"/>       
         <link rel="stylesheet" href="css/Main.css">
+        <link rel="stylesheet" href="css/MP.css">
          <link
       href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
     />
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         <script type="text/javascript" src="js/comment.js"></script>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=PT+Sans&display=swap" rel="stylesheet">
@@ -30,7 +31,7 @@
         
         <?php
         try{
-           $query = $con ->prepare("SELECT * FROM monologue WHERE monoID = :monoID"); //Gets the data from the database based off ID
+           $query = $con ->prepare("SELECT * FROM monologue inner join image on image.imgID = monologue.imgID WHERE monoID = :monoID"); //Gets the data from the database based off ID
             $success = $query->execute([
                 ':monoID' => $monoID
                     ]);
@@ -41,7 +42,8 @@
         $Part = $mono->part;
         $Title = $mono->title;
         $author = $mono->author;
-        $img = $mono->img;
+        $img = $mono->imgFile;
+        $alt = $mono->alt;
         $description = $mono->description;
         $content = $mono->content;
         
@@ -57,7 +59,7 @@
                 <h3>Author: $author</h3>
                 <p>$description</p>
                 </div><div class = 'mono-img'>
-                <img src='$img'/>
+                <img src='$img' alt='$alt'/>
                 </div></div><hr>";
                 
                 
@@ -68,7 +70,7 @@
             $success = $query->execute([
                 ':period' => $mono->period
                     ]);
-            $tips = $query->fetch(PDO::FETCH_OBJ);
+         $tips = $query->fetch(PDO::FETCH_OBJ);
          $output .= "<h1>$tips->title</h1><p>$tips->text</p>$tips->vid</div>";//This is displayed
         
         echo $output;// All the current output is then added
@@ -126,7 +128,7 @@
                 }
             }catch(PDOException $e){
                 echo $sql . "<br>" . $e->getMessage();
-            } 
+        } 
                 if($userID != 1){//This only allows login users to comments, if not the form that allows users to comment does not appear
                 echo"<form action='#' id='formContent'>
                         <textarea rows='10' name='content' id='content' form='formContent'></textarea>
@@ -144,57 +146,5 @@
             
         </div>
    <?php include_once 'footer.php';?><!-- Includes the footer in this page -->
-        <style>
-            .Pre-Mono{
-                width: 95%;
-                margin: 20px auto;
-                display: flex;
-            }
-            .mono-img{
-                width: 60%;
-                margin: 0 20px;
-            }
-            .mono-img img{
-                width: 100%;
-                height: auto;
-            }
-            article{
-                font-size: 25px;
-                margin-left: auto;
-                margin-right: auto;
-                display: block;
-                vertical-align: middle;
-                width: 80%;  
-            }
-            
-            
-            @media only screen and (max-width: 800px) {
-                .info h1{
-                    font-size: 2rem;
-                }
-                .info h3{
-                    font-size: 1.6rem;
-                }
-                .info p{
-                    font-size: 1.4rem;
-                }
-            }
-            @media only screen and (max-width: 550px) {
-            article, article p, .tip p{
-                    font-size: 18px;
-                    width: 90%;
-                }
-            }
-            @media only screen and (max-width: 400px) {
-                article, article p{
-                    font-size: 12px;
-                    width: 90%;
-                }
-            }
-        
-            
-            
-
-        </style>
     </body>
 </html>

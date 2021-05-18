@@ -9,7 +9,7 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <title>Password Reset</title>
         <link rel="icon" type="img/png" href="img/DSearchBar.png"/>
-         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         <script type="text/javascript" src="js/passReset.js"></script>
         <link rel="stylesheet" href="css/Other.css"/>
     </head>

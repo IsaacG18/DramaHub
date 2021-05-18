@@ -30,7 +30,7 @@ $(document).ready(function () {
                             window.location.href =  "index.php";
                             
                         } else {
-                            alert('Check with system admin, report this message'+ data);//Alerts send and deals with an error from the php file 
+                            alert('Check with system admin(Admin@email), report this message'+ data);//Alerts send and deals with an error from the php file 
                         }
                     });
         }

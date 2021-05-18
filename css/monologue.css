@@ -7,23 +7,17 @@
                margin: 3px auto;
             }
             .mono{
-                height: 350px;
+                height: 320px;
             }
             .gallery{
                 display: inline-grid;
                 grid-template-columns: auto auto auto;
             }
             
-            .mono button{
-                color: #fefeff;
-                background: #555555;
-                height: 30px;
-                margin: 10px;
-            }
               
     @media only screen and (max-width: 1000px) {
          .mono{
-            height: 690px;
+            height: 630px;
             margin: 3px auto;
             width: 90%;
         }
@@ -37,13 +31,13 @@
     }
      @media only screen and (max-width: 900px) {
             .mono{
-                height: 650px;
+                height: 580px;
             }
     }
     @media only screen and (max-width: 800px) {
         
          .mono{
-            height: 600px;
+            height: 530px;
         }
     }
             @media only screen and (max-width: 650px) {

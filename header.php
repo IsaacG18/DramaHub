@@ -23,7 +23,7 @@
                 <button class = 'SignUp' type='submit'>Sign Up</button>
                 </form></div>";//Allows Guest to login, or  sign up
             }else{
-                $outputB .="<form action='SignOut.php' method='POST'>
+                $outputB .="<form action='signOut.php' method='POST'>
                                 <button class = 'SignOut' type='submit'>Sign Out</button>
                             </form>
                             <form action='Delete.php' method='POST'>
@@ -36,7 +36,7 @@
             $outputB .= "<div class = 'nav'><form action='index.php' method='GET'>
                 <button class = 'first' type='submit'>Home</button>
              </form>
-             <form action='Shows.php' method='GET'>
+             <form action='shows.php' method='GET'>
                 <button class = 'other' type='submit'>Shows</button>
              </form>
              <form action='Monologues.php' method='GET'>

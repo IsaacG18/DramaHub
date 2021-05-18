@@ -11,7 +11,7 @@ and open the template in the editor.
         <link rel="icon" type="img/png" href="img/DSearchBar.png"/>
         <meta name="robots" content="noindex, nofollow">
         <link rel="stylesheet" href="css/Other.css"/>
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         <script type="text/javascript" src="js/login.js"></script>
     </head>
     <body>

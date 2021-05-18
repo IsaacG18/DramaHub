@@ -1,0 +1,48 @@
+            .Pre-Mono{
+                width: 95%;
+                margin: 20px auto;
+                display: flex;
+            }
+            .mono-img{
+                width: 60%;
+                margin: 0 20px;
+            }
+            .mono-img img{
+                width: 100%;
+                height: auto;
+            }
+            article{
+                font-size: 25px;
+                margin-left: auto;
+                margin-right: auto;
+                display: block;
+                vertical-align: middle;
+                width: 80%;  
+            }
+            
+            
+            @media only screen and (max-width: 800px) {
+                .info h1{
+                    font-size: 2rem;
+                }
+                .info h3{
+                    font-size: 1.6rem;
+                }
+                .info p{
+                    font-size: 1.4rem;
+                }
+            }
+            @media only screen and (max-width: 550px) {
+            article, article p, .tip p{
+                    font-size: 18px;
+                    width: 90%;
+                }
+            }
+            @media only screen and (max-width: 400px) {
+                article, article p{
+                    font-size: 12px;
+                    width: 90%;
+                }
+            }
+        
+            

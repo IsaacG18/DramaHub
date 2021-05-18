@@ -10,8 +10,7 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <title>Sign Out</title>
         <meta name="robots" content="noindex, nofollow">
-        <link rel="stylesheet" href="css/Login.css"/>
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
         <script type="text/javascript" src="js/signOut.js"></script>
         <link rel="stylesheet" href="css/Other.css"/>
     </head>

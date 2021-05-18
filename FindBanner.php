@@ -23,13 +23,13 @@
                  }
                 $arr[$i] = $search;//Adds value
                 try{
-                    $query = $con ->prepare("SELECT * FROM advert WHERE adID =:adID"); //Gets the advert based on the value
+                    $query = $con ->prepare("SELECT * FROM advert inner join image on advert.imgID = image.imgID WHERE adID =:adID"); //Gets the advert based on the value
                     $success = $query->execute([
                     ':adID' => $search
                         ]);
                     $banner= $query->fetch(PDO::FETCH_OBJ);
                     if($success){
-                        $output .= "url(../$banner->image) ` .split$i ~"; //Addes the image to the database 
+                        $output .= "url($banner->imgFile) ` .split$i ~"; //Addes the image to the database 
                     }
                 }catch(PDOException $e){
                     echo $sql . "<br>" . $e->getMessage();

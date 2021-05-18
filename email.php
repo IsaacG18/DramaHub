@@ -3,6 +3,7 @@ include_once 'dbconnection.php';//Adds access to the database
     $min = 10000;//minimum value of code
     $max = 99999;//maximum value of code
     $unquie = false;//Used to resent if the code is unqiue
+    $usernameFind ="";
     do{
         $code = rand ( $min , $max );//get a random code
         try{
@@ -27,7 +28,9 @@ include_once 'dbconnection.php';//Adds access to the database
                     );
             $query -> execute([$email]);
             $users = $query->fetch(PDO::FETCH_OBJ);
+            
         if(isset($users)){//Check if the user is found
+            $usernameFind = $users->username;
             $query = $con->prepare(""
                             . "UPDATE users SET CODE = :code"
                             . " WHERE email = :email");//Adds the code to the email address
@@ -65,7 +68,7 @@ try {
     $mail->WordWrap = 50;//Formating the data line width in the email                                
     $mail->isHTML(false);// This select if the email will be sent with HTML                                
     $mail->Subject = "Reset Email";//Subject of the email
-    $mail->Body    = "Enter this $code to the area this will allow you to reset the password.";//Content of the emailer
+    $mail->Body    = "The username $usernameFind is trying to be reset. Enter this $code to the area this will allow you to reset the password.";//Content of the emailer
     if(!$mail->send()) {
         echo 'Mailer Error: ' . $mail->ErrorInfo;//If they is an error
     } else {
